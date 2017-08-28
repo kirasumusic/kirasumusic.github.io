@@ -1,0 +1,244 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: black;
+
+  color:white;
+  font-family: 'Quicksand', sans-serif;
+}
+
+
+#container {
+  position:fixed;
+  height:100%;
+  width:100%;
+}
+
+#container {
+position: absolute;
+padding:50px;
+top:140px;
+font-family: 'Quicksand', sans-serif;
+}
+
+p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 150%;
+}
+
+#p5_loading {
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 400%;
+
+  margin: auto;
+}
+
+/*.container {
+  font-family: 'Quicksand', sans-serif;
+  padding-top:200px;
+  color:white;
+  background-color: transparent;
+}*/
+
+.showing {
+  display: inline;
+}
+
+.hidden {
+  display: none;
+}
+
+canvas {
+  vertical-align: top;
+  margin: auto;
+  position:fixed;
+  top:0px;
+  width:100%;
+  z-index:-100;
+}
+
+@font-face {
+  font-family: 'Bazar';
+  src: url('fonts/Bazar.ttf');
+}
+
+.navbar-header {
+  padding:10px;
+  float: none;
+}
+.navbar-toggle {
+  display: inline;
+}
+.navbar-collapse.collapse {
+  display: none!important;
+  width: 150px;
+  float: right;
+}
+
+.navbar-nav {
+  float: none!important;
+}
+.navbar-nav>li {
+  float: none;
+  text-align: right;
+  padding-right:30px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  color: #9d9d9d;
+}
+
+.navbar-collapse.collapse.in{
+  display:block !important;
+}
+
+.navbar-inverse {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.navbar-inverse .navbar-toggle {
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+  font-size: 400%;
+  font-family: 'Quicksand', sans-serif;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: transparent;
+}
+
+.navbar-collapse .collapse {
+  z-index: 100;
+}
+
+a#homePageLogo, a#logo {
+  position: fixed;
+  top:30px;
+  left:50px;
+  width:224px;
+  height:107px;
+  z-index: 2000;
+}
+
+#socials {
+  display: inline;
+}
+
+#logo svg, #homePageLogo svg {
+  width:224px;
+  height:107px;
+}
+
+#logo svg g, #homePageLogo svg g {
+  transform: scale(.08);
+}
+#logo svg path, #homePageLogo svg path {
+  fill:white;
+
+}
+
+nav {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+
+
+#soundIcon {
+  padding-right:25px;
+}
+
+#soundIcon i {
+  margin-left:-4px;
+}
+
+#fbIcon {
+}
+
+.navIcon {
+  padding-right:10px;
+  float:right;
+}
+
+.navbar-btn {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: white;
+  height:35px;
+  width:45px;
+}
+
+
+.fa {
+  font-size: 1.5em;
+}
+
+#blackbar {
+  position: fixed;
+  width:100%;
+  height:180px;
+  top:0px;
+  background-color: black;
+}
+
+#about #blackbar {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  #socials {
+    display: none;
+  }
+  .navbar-collapse.collapse {
+    width: 100%;
+  }
+
+  #homePageLogo svg g {
+    /* CSS that should be displayed if width is equal to or less than 675px goes here */
+    transform: scale(.03);
+  }
+
+  a#homePageLogo {
+    left:30px;
+  }
+
+  a#logo {
+    left:20px;
+    height:50px;
+    width:100px;
+  }
+
+  #logo svg g {
+    transform: scale(.03);
+  }
+
+  #logo svg {
+    height:50px;
+    width:100px;
+  }
+
+  #socials {
+    display: none;
+  }
+}
+
+.navbarBlk {
+  background-color: black;
+}

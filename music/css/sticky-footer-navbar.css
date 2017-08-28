@@ -1,0 +1,57 @@
+/* http://getbootstrap.com/docs/3.3/examples/sticky-footer-navbar/sticky-footer-navbar.css*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 85px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 90px;
+  background-color: rgba(0, 0, 0, .6);
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.footer > .container {
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.nowPlayingBox {
+  line-height:150%;
+}
+.nowPlayingText {
+  font-size: 120%;
+}
+
+.audioBox {
+  position:relative;
+  padding-top:25px;
+}
+
+.songTitle {
+  font-style: normal;
+  font-size:300%;
+}
+
+.arrow a{
+  position:relative;
+  top:10px;
+  height:100%;
+  font-size:250%;
+  color:#ddd;
+}
+
+.arrow:hover {
+  color:blue;
+}

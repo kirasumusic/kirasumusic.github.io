@@ -1,0 +1,20 @@
+.navbar-inverse {
+background-color: rgba(0, 0, 0, 0);
+border-color: rgba(255, 255, 255, 0);
+}
+
+.navbar-inverse .navbar-toggle {
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .navbar-inverse {
+  background-color: rgba(0, 0, 0, .8);
+  border-color: rgba(255, 255, 255, 0);
+}
+.navbar-nav>li {
+    padding-right: 15px;
+}
+
+}
