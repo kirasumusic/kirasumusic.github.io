@@ -101,3 +101,13 @@ function windowResized() {
     bubbles[i].update();
   }
 }
+
+
+function keyPressed() {
+  if (keyCode == LEFT_ARROW) {
+    window.location.href='song-for-m.html';
+  }
+  else if (keyCode == RIGHT_ARROW) {
+    window.location.href='rite-of-spring.html';
+  }
+}

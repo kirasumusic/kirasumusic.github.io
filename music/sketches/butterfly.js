@@ -8,6 +8,8 @@ var bScale = .4;
 var movingApart = true;
 var audio;
 var stars = [];
+var ellipseS = 0;
+var pulsing = false;
 
 function preload() {
   backgroundImg = loadImage("assets/delta/background.jpg");
@@ -50,6 +52,14 @@ function setup() {
 
 function draw() {
   background(backgroundImg);
+  if (pulsing) {
+    noStroke();
+    for (var i = 0; i < 10; i++) {
+      fill(255, (i%4)*10);
+      ellipse(width/2, height/2, ellipseS%width+i*100);
+    }
+    ellipseS+=3;
+  }
     stars.star();
 
   for (var i = 0; i < butterflyParts.left.length; i++) {
@@ -84,6 +94,7 @@ function ButterflyPart(img, x, y, dir) {
   this.y = this.finalY;
   this.alreadyChanged = false;
   this.isSelected = false;
+  this.hasSnapped = false;
   this.show = true;
   this.dragStart = {x: 0, y: 0};
   this.lastChecked = 0;
@@ -126,28 +137,30 @@ function ButterflyPart(img, x, y, dir) {
     if (this.show) image(this.img, this.x, this.y);
   }
   this.mouseOver = function() {
+    if (!this.hasSnapped) {
+      if (mouseX > this.x && mouseX < this.x + this.img.width && mouseY > this.y && mouseY < this.y + this.img.height){
+        noStroke();
+        fill(255, 10);
+        ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.75);
+        fill(255, 20);
+        ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.5);
+        fill(255, 30);
+        ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.25);
 
-    if (mouseX > this.x && mouseX < this.x + this.img.width && mouseY > this.y && mouseY < this.y + this.img.height){
-      noStroke();
-      fill(255, 10);
-      ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.75);
-      fill(255, 20);
-      ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.5);
-      fill(255, 30);
-      ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.25);
-
-      // fill(0, 255, 255);
-      // ellipse(this.x, this.y, 30);
-      //
-      // fill(50, 255, 255);
-      // ellipse(this.finalX, this.finalY, 30);
-      return true;
-    };
+        // fill(0, 255, 255);
+        // ellipse(this.x, this.y, 30);
+        //
+        // fill(50, 255, 255);
+        // ellipse(this.finalX, this.finalY, 30);
+        return true;
+      };
+      return false;
+    }
     return false;
   }
   this.checkSelected = function () {
     if (this.mouseOver()) {
-      if (!currSelected) {
+      if (!currSelected && !this.hasSnapped) {
         this.dragStart.x = mouseX - this.x;
         this.dragStart.y = mouseY - this.y;
         this.isSelected = true;
@@ -171,7 +184,8 @@ function ButterflyPart(img, x, y, dir) {
       if (d < 150) {
         this.x = this.finalX;
         this.y = this.finalY;
-        console.log("resting place");
+        this.hasSnapped = true;
+        if (checkComplete()) pulsing = true;
       }
     }
     this.isSelected = false;
@@ -206,6 +220,16 @@ function mouseReleased() {
   }
 }
 
+function checkComplete() {
+  for (var i = 0; i < butterflyParts.left.length; i++) {
+    if (!butterflyParts.left[i].hasSnapped) return false;
+  }
+  for (var i = 0; i < butterflyParts.right.length; i++) {
+    if (!butterflyParts.right[i].hasSnapped) return false;
+  }
+  return true;
+}
+
 function mousePressed() {
   for (var i = 0; i < butterflyParts.left.length; i++) {
     butterflyParts.left[i].checkSelected();
@@ -223,4 +247,13 @@ window.onload = function() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   stars.resize();
+}
+
+function keyPressed() {
+  if (keyCode == LEFT_ARROW) {
+    window.location.href='kirasu.html';
+  }
+  else if (keyCode == RIGHT_ARROW) {
+    window.location.href='delta-waves.html';
+  }
 }
