@@ -38,6 +38,7 @@ function draw() {
   image(whale, width/2+50*(whale.width/origW), height/2+30+10*sin(millis()/600));
   for(var i = 0; i < bubbles.length; i++) {
     bubbles[i].display();
+    bubbles[i].mouseOver();
   }
   imageMode(CORNER);
   image(ocean, -20+15*sin(millis()/500), 100+15*sin(millis()/700), waterWidth, height);
@@ -89,8 +90,24 @@ function Bubble() {
     }
 
   }
-
+  this.mouseOver = function() {
+    if (!this.hidden) {
+      var x = mouseX - this.x;
+      var y = mouseY - this.y;
+      var d = Math.sqrt(x*x - y*y);
+      if (d < this.rad) this.pop();
+    }
+  }
+  this.pop = function() {
+    this.hidden = true;
+  }
 }
+
+// function mouseReleased() {
+//   for(var i = 0; i < bubbles.length; i++) {
+//     if (bubbles[i].mouseOver()) bubbles[i].pop();
+//   }
+// }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
