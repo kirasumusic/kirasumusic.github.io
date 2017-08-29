@@ -7,6 +7,7 @@ var currSelected = false;
 var bScale = .4;
 var movingApart = true;
 var audio;
+var stars = [];
 
 function preload() {
   backgroundImg = loadImage("assets/delta/background.jpg");
@@ -36,22 +37,20 @@ function setup() {
   for (var i = 0; i < butterflyParts.right.length; i++) {
     butterflyParts.right[i].resizePart(bScale);
   }
+
+  stars = new Flock();
+  // Add an initial set of boids into the system
+  for (var i = 0; i < 100; i++) {
+    var b = new Boid(random(width),random(height), i);
+    stars.addBoid(b);
+  }
 }
 
 
 
 function draw() {
-  //if (movingApart) {
-  background(0);
-  //background(backgroundImg);
-
-  // left wing
-  // moveStep+= 1 * moveD;
-  //
-  // if (moveStep > 200) moveD = -1;
-  // else if (moveStep < 0) moveD = 1;
-
-  //translate(0, 100);
+  background(backgroundImg);
+    stars.star();
 
   for (var i = 0; i < butterflyParts.left.length; i++) {
     butterflyParts.left[i].display();
@@ -129,9 +128,19 @@ function ButterflyPart(img, x, y, dir) {
   this.mouseOver = function() {
 
     if (mouseX > this.x && mouseX < this.x + this.img.width && mouseY > this.y && mouseY < this.y + this.img.height){
-      noFill();
-      stroke(0, 255, 255);
-      ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width);
+      noStroke();
+      fill(255, 10);
+      ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.75);
+      fill(255, 20);
+      ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.5);
+      fill(255, 30);
+      ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.25);
+
+      // fill(0, 255, 255);
+      // ellipse(this.x, this.y, 30);
+      //
+      // fill(50, 255, 255);
+      // ellipse(this.finalX, this.finalY, 30);
       return true;
     };
     return false;
@@ -153,6 +162,18 @@ function ButterflyPart(img, x, y, dir) {
     }
   }
   this.reset = function () {
+    if (this.isSelected) {
+      var x1 = this.x;
+      var y1 = this.y;
+      var x2 = this.finalX;
+      var y2 = this.finalY;
+      var d = Math.sqrt((x1-x2)*(x1-x2) - (y1-y2)*(y1-y2));
+      if (d < 150) {
+        this.x = this.finalX;
+        this.y = this.finalY;
+        console.log("resting place");
+      }
+    }
     this.isSelected = false;
     this.dragStart.x = 0;
     this.dragStart.y = 0;
@@ -197,4 +218,9 @@ function mousePressed() {
 window.onload = function() {
   audio = document.getElementById('myAudio');
   audio.play();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  stars.resize();
 }
