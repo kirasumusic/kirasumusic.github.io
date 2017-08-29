@@ -94,7 +94,7 @@ function Bubble() {
     if (!this.hidden) {
       var x = mouseX - this.x;
       var y = mouseY - this.y;
-      var d = Math.sqrt(x*x - y*y);
+      var d = Math.sqrt(x*x + y*y);
       if (d < this.rad) this.pop();
     }
   }

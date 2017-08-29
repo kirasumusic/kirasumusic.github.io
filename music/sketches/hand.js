@@ -12,6 +12,10 @@ var items = [];
 var itemsScale = [.15, .15, .15, .15, .15, .13];
 var starImgs = [];
 var stars = [];
+var boxesFull = false;
+var wentThroughBox = false;
+var currentBox = 0;
+var currSelected = false;
 
 var lastTouched = "top";
 
@@ -34,19 +38,30 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   imageMode(CENTER);
 
-  for (var i = 0; i < 100; i++ ) {
-    stars[i] = new Star();
+  for (var i = 0; i < 50; i++ ) {
+    stars[i] = new Star(i%6);
   }
 }
 
 function draw() {
   background(0);
 
-  if (millis() < 8000) rotateOnMouse();
-  else autoRotate(3, 1000);
+  if (!boxesFull || wentThroughBox) rotateOnMouse();
+  else rotateBoxes(3, 1000);
+  //else autoRotate(3, 1000);
+
+  for (var i = 0; i < 4; i++) {
+    var rs = items[0].height*itemsScale[0];
+    noFill();
+    strokeWeight(3);
+    stroke(255);
+    rect(width/2 +i*rs - rs*2, 150, rs, rs);
+  }
 
   for (var i = 0; i < stars.length; i++ ) {
     stars[i].display();
+    stars[i].mouseOver();
+    stars[i].move();
   }
 }
 
@@ -59,6 +74,15 @@ function rotateOnMouse() {
     lastTouched == "top";
   }
   drawHand(getHandQuadrant(), currentItem);
+}
+
+function rotateBoxes(speed, delay) {
+  openClose(speed, delay, currentBox);
+  if (status == handMode.closed && previousStatus == handMode.closing) {
+    getNextBox();
+    numOpens++;
+  }
+  previousStatus = status;
 }
 
 function autoRotate(speed, delay) {
@@ -142,6 +166,14 @@ function drawHand(num, objNum) {
   }
 }
 
+function getNextBox() {
+  currentBox++;
+  if (currentBox == boxes.length) {
+    currentBox = 0;
+    wentThroughBox = true;
+  }
+}
+
 function changeItem() {
   currentItem++;
   if (currentItem == items.length) currentItem = 0;
@@ -155,32 +187,79 @@ function drawItem(num) {
   pop();
 }
 
-function Star() {
-  this.pic = floor(random(6));
+function Star(pic) {
+  this.pic = pic;
+  this.isSelected = false;
+  this.hasSnapped = false;
+  this.show = true;
+  this.dragStart = {x: 0, y: 0};
+  //this.pic = floor(random(6));
   if (floor(random(2)) == 0) {
-    this.x = random(width/2-50);
-    console.log("why");
+    this.x = random(width/2-150);
   }
   else {
-    console.log("whynot");
-    this.x = random(width/2-50) + width/2 + 100;
+    this.x = random(width/2 + 100, width);
   }
-  this.y = random(0, height);
+  this.y = random(height/10, height*9/10);
+  this.angle = random(2 * PI);
 
-  this.angle = random(2 * PI)
   this.display = function() {
-    this.x++;
-    if (this.x > width+50) this.x = -50;
-    if (this.y > height) this.y = 0;
-    else if (this.y < 0) this.y = height;
+    image(starImgs[this.pic], this.x, this.y);
+  }
+  this.mouseOver = function() {
+    var w = starImgs[this.pic].width;
+    var h = starImgs[this.pic].height;
+    if (mouseX > this.x-w/2 && mouseX < this.x + w/2 && mouseY > this.y - h/2 && mouseY < this.y + h/2) {
 
-    push();
-    scale(.5);
-    rotate(this.angle);
-    translate(this.x*2, this.y*2);
-    image(starImgs[this.pic], 0, 0);
-    pop();
+      noStroke();
+      fill(255, 30);
+      ellipse(this.x , this.y, w);
+      fill(255, 50);
+      ellipse(this.x, this.y, w*.75);
+      fill(255, 70);
+      ellipse(this.x, this.y, w*.5);
+      return true;
+    }
+    return false;
+  }
+  this.move = function() {
+    if (this.isSelected) {
+      this.x = mouseX-this.dragStart.x;
+      this.y = mouseY-this.dragStart.y;
+    }
+  }
+  this.reset = function () {
+    if (this.isSelected) {
+      this.isSelected = false;
+      this.dragStart.x = 0;
+      this.dragStart.y = 0;
+    }
+    this.isSelected = false;
+    this.dragStart.x = 0;
+    this.dragStart.y = 0;
+  }
+  this.checkSelected = function () {
+    if (this.mouseOver()) {
+      if (!currSelected && !this.hasSnapped) {
+        this.dragStart.x = mouseX - this.x;
+        this.dragStart.y = mouseY - this.y;
+        this.isSelected = true;
+        currSelected = true;
+      }
+    }
+  }
+}
 
+function mousePressed() {
+  for (var i = 0; i < stars.length; i++) {
+    stars[i].checkSelected();
+  }
+}
+
+function mouseReleased() {
+  currSelected = false;
+  for (var i = 0; i < stars.length; i++) {
+    stars[i].reset();
   }
 }
 
