@@ -23,6 +23,7 @@ Flock.prototype.changeMode = function(m) {
   }
 }
 
+
 Flock.prototype.addBoid = function(b) {
   this.boids.push(b);
 }
@@ -219,11 +220,12 @@ Boid.prototype.renderBird = function() {
   push();
   translate(this.position.x,this.position.y);
   rotate(theta);
-  beginShape();
-  vertex(0, -this.r*2);
-  vertex(-this.r, this.r*2);
-  vertex(this.r, this.r*2);
-  endShape(CLOSE);
+  // beginShape();
+  // vertex(0, -this.r*2);
+  // vertex(-this.r, this.r*2);
+  // vertex(this.r, this.r*2);
+  // endShape(CLOSE);
+
 
   if (this.landed) {
     var wc = 13;
@@ -239,11 +241,15 @@ Boid.prototype.renderBird = function() {
   }
   if(this.wingUp) {
     var r = 4.0;
-    beginShape(TRIANGLES);
-    vertex(0, -r);
-    vertex(-r*2, r);
-    vertex(r*2, r);
-    endShape();
+    // beginShape(TRIANGLES);
+    // vertex(0, -r);
+    // vertex(-r*2, r);
+    // vertex(r*2, r);
+    // endShape();
+    image(img1, this.x, this.y);
+  }
+  else {
+    image(img2, this.x, this.y);
   }
   pop();
 }
