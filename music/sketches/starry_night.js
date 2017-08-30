@@ -2,6 +2,7 @@ var stars = [];
 var mode = {flying: 0, home: 1, mouse:2, landed:3};
 var img1, img2;
 var dressClicked = false;
+var dressTime = 0;
 
 function preload() {
   starryNight = loadImage("../assets/skydress.jpg");
@@ -17,9 +18,54 @@ function setup() {
   // Add an initial set of boids into the system
   for (var i = 0; i < 100; i++) {
     //var b = new Boid(random(width),random(height), i);
+    var x = random(width/2-150, width/2+150);
+    var y = random(height*4/5-50, height);
     var b = new Boid(width/2, height*4/5, i);
     stars.addBoid(b);
   }
+  $("#canvas2").jParticle({
+    // number of particles
+    particlesNumber: 100,
+
+    // Distance where link is full opacity
+    linkDist: 50,
+
+    // Distance where particles start linking.
+    createLinkDist: 150,
+
+    // disable links between particles
+    disableLinks: false,
+
+    // disable mouse interaction
+    disableMouse: false,
+
+    // background color
+    background: 'none',
+
+    // Particles and links color.
+    color: 'white',
+
+    // container's width/height
+    width: null,
+    height: null,
+
+    // Links width in pixels
+    linksWidth: 1,
+
+    particle: {
+
+      // Particles color.
+      color: "white",
+
+      // min / max size
+      minSize: 2,
+      maxSize: 4,
+
+      // animation speed
+      speed: 60
+    }
+  });
+
 }
 
 function draw() {
@@ -58,8 +104,9 @@ function overDress() {
 }
 
 function mouseClicked() {
-  if (overDress() ) {
+  if (!dressClicked && overDress() ) {
     dressClicked = true;
+    dressTime = millis();
   }
 }
 

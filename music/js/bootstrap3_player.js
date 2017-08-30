@@ -21,7 +21,7 @@ $('audio[controls]').before(function () {
   $(data_toggle).attr('style', 'opacity:0.3');
   $(data_toggle).click(function () {$(data_sec).collapse('toggle'); });
   $(data_toggle).attr('title', 'Details');
-  $(data_toggle).tooltip({'container': 'body', 'placement': 'top', 'html': true});
+  //$(data_toggle).tooltip({'container': 'body', 'placement': 'top', 'html': true});
   $(toggle_holder).append(data_toggle);
 
   var data_table = document.createElement('table');
@@ -36,7 +36,7 @@ $('audio[controls]').before(function () {
     $(player_box).find('input[type="range"]').hide();
     $(player_box).find('.glyphicon-refresh').text('Error');
     $(player_box).find('.glyphicon-refresh').parent().attr('title', 'There was an error loading the audio.');
-    $(player_box).find('.glyphicon-refresh').parent().tooltip('fixTitle');
+    //$(player_box).find('.glyphicon-refresh').parent().tooltip('fixTitle');
     $(player_box).find('.glyphicon-refresh').removeClass('glyphicon glyphicon-refresh spin');
   }; // load_error
 
@@ -189,7 +189,7 @@ $('audio[controls]').before(function () {
     var time = document.createElement('button');
     $(time).attr('type','button');
     $(time).addClass('btn btn-default col-sm-3');
-    $(time).tooltip({'container': 'body', 'placement': 'right', 'html': true});
+    //$(time).tooltip({'container': 'body', 'placement': 'right', 'html': true});
 
     time.twodigit = function (myNum) {
       return ('0' + myNum).slice(-2);
@@ -219,18 +219,18 @@ $('audio[controls]').before(function () {
         $(time).html(time.timesplit(song.duration));
         $(time).attr({'title': position_title  + (time.timesplit(song.currentTime))});
       }
-      $(time).tooltip('fixTitle');
+      //$(time).tooltip('fixTitle');
     }; // time.showtime
 
     $(time).click(function () {
       song.pause();
       song.currentTime = 0;
       time.showtime();
-      $(time).tooltip('fixTitle');
-      $(time).tooltip('show');
+    //  $(time).tooltip('fixTitle');
+    //  $(time).tooltip('show');
     }); // time.click
 
-    $(time).tooltip('show');
+    // $(time).tooltip('show');
     $(song).on('loadedmetadata', time.showtime);
     $(song).on('loadeddata', time.showtime);
     $(song).on('progress', time.showtime);
