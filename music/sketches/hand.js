@@ -15,7 +15,9 @@ var stars = [];
 var boxesFull = false;
 var wentThroughBox = false;
 var currentBox = 0;
-var currSelected = false;
+var currSelected = null;
+var boxes = [];
+var allMatched = false;
 
 var lastTouched = "top";
 
@@ -37,25 +39,30 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   imageMode(CENTER);
+  rectMode(CENTER);
 
   for (var i = 0; i < 50; i++ ) {
     stars[i] = new Star(i%6);
+  }
+
+  for (var i = 0; i < 4; i++) {
+    var rs = items[0].height*itemsScale[0];
+    boxes[i] = new Box(width/2+rs*(-1.5+i), 150, rs, i);
   }
 }
 
 function draw() {
   background(0);
 
-  if (!boxesFull || wentThroughBox) rotateOnMouse();
-  else rotateBoxes(3, 1000);
+  //if (!boxesFull || wentThroughBox) rotateOnMouse();
+  //else rotateBoxes(3, 1000);
   //else autoRotate(3, 1000);
 
+  autoRotate(3, 1000);
+
   for (var i = 0; i < 4; i++) {
-    var rs = items[0].height*itemsScale[0];
-    noFill();
-    strokeWeight(3);
-    stroke(255);
-    rect(width/2 +i*rs - rs*2, 150, rs, rs);
+    boxes[i].display();
+    boxes[i].mouseOver();
   }
 
   for (var i = 0; i < stars.length; i++ ) {
@@ -89,7 +96,7 @@ function autoRotate(speed, delay) {
   openClose(speed, delay, currentItem);
   if (status == handMode.closed && previousStatus == handMode.closing) {
     //if (numOpens > 0) {
-      changeItem();
+    changeBoxItem();
     //}
     numOpens++;
   }
@@ -174,6 +181,12 @@ function getNextBox() {
   }
 }
 
+function changeBoxItem() {
+  currentItem++;
+  // 4 symbols, one empty
+  if (currentItem == 5) currentItem = 0;
+}
+
 function changeItem() {
   currentItem++;
   if (currentItem == items.length) currentItem = 0;
@@ -183,7 +196,8 @@ function drawItem(num) {
   push();
   translate(width/2, height/2+20);
   scale(itemsScale[num]);
-  image(items[num], 0,0);
+
+  if (num < 4) image(items[num], 0,0);
   pop();
 }
 
@@ -193,6 +207,7 @@ function Star(pic) {
   this.hasSnapped = false;
   this.show = true;
   this.dragStart = {x: 0, y: 0};
+  this.boxNum = -1;
   //this.pic = floor(random(6));
   if (floor(random(2)) == 0) {
     this.x = random(width/2-150);
@@ -204,6 +219,16 @@ function Star(pic) {
   this.angle = random(2 * PI);
 
   this.display = function() {
+    if (allMatched) {
+      var w = starImgs[this.pic].width;
+      noStroke();
+      fill(255, 30);
+      ellipse(this.x , this.y, w*sin(millis()/100));
+      fill(255, 50);
+      ellipse(this.x, this.y, w*sin(millis()/100)*.75);
+      fill(255, 70);
+      ellipse(this.x, this.y, w*sin(millis()/100)*.5);
+    }
     image(starImgs[this.pic], this.x, this.y);
   }
   this.mouseOver = function() {
@@ -227,6 +252,14 @@ function Star(pic) {
       this.x = mouseX-this.dragStart.x;
       this.y = mouseY-this.dragStart.y;
     }
+    else if (!this.hasSnapped){
+      this.x += 2.0*sin(this.angle);
+      this.y += 2.0*cos(this.angle);
+      if (this.x > width) this.x = 0;
+      else if (this.x < 0) this.x = width;
+      if (this.y > height) this.y = 0;
+      else if (this.y < 0) this.y = height;
+    }
   }
   this.reset = function () {
     if (this.isSelected) {
@@ -238,16 +271,63 @@ function Star(pic) {
     this.dragStart.x = 0;
     this.dragStart.y = 0;
   }
+  this.set = function(x, y) {
+    this.x = x;
+    this.y = y;
+  }
   this.checkSelected = function () {
     if (this.mouseOver()) {
-      if (!currSelected && !this.hasSnapped) {
+      if (currSelected == null) {
         this.dragStart.x = mouseX - this.x;
         this.dragStart.y = mouseY - this.y;
         this.isSelected = true;
-        currSelected = true;
+        currSelected = this;
+        if (this.hasSnapped) {
+          if (this.boxNum >=0 && this.boxNum < boxes.length) {
+            allMatched = false;
+            boxes[this.boxNum].reset();
+          }
+        }
       }
     }
   }
+}
+
+function Box(x, y, w, sym) {
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.sym = sym;
+  this.isFull = false;
+  this.hasMatch = false;
+  this.mouseOver = function() {
+    if (mouseX > this.x-this.w/2 && mouseX < this.x + this.w/2 && mouseY > this.y - this.w/2 && mouseY < this.y + this.w/2){
+      if (!this.isFull) {
+        noStroke();
+        fill(255, 30);
+        ellipse(this.x , this.y, this.w, this.w);
+        fill(255, 50);
+        ellipse(this.x, this.y, this.w*.75,  this.w*.75);
+        fill(255, 70);
+        ellipse(this.x, this.y, this.w*.5,this.w*.5);
+        fill(255, 90);
+        ellipse(this.x, this.y, this.w*.25,this.w*.25);
+      }
+      return true;
+    }
+    return false;
+  }
+  this.display = function() {
+    noFill();
+    strokeWeight(3);
+    stroke(255);
+    rect(this.x, this.y, this.w, this.w);
+  }
+  this.reset = function() {
+    this.isFull = false;
+    this.isMatch = false;
+  }
+
 }
 
 function mousePressed() {
@@ -257,12 +337,43 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-  currSelected = false;
+  if (currSelected != null) {
+    currSelected.hasSnapped = false;
+    for (var i = 0; i < boxes.length; i++) {
+      if (!boxes[i].isFull && boxes[i].mouseOver()) {
+        boxes[i].isFull = true;
+        currSelected.hasSnapped = true;
+        currSelected.boxNum = i;
+        if (boxes[i].sym == currSelected.pic) {
+          boxes[i].hasMatch = true;
+          checkForMatches();
+        }
+        // now make shape fit nicely in box
+        currSelected.set(boxes[i].x, boxes[i].y);
+        currSelected = null;
+        for (var i = 0; i < stars.length; i++) {
+          stars[i].reset();
+        }
+        return;
+      }
+    }
+  }
+  currSelected = null;
   for (var i = 0; i < stars.length; i++) {
     stars[i].reset();
   }
 }
 
+function checkForMatches() {
+  var m = 0;
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i].hasMatch) m++;
+  }
+  if (m == boxes.length) {
+    allMatched = true;
+  }
+  else allMatched = false;
+}
 
 function keyPressed() {
   if (keyCode == LEFT_ARROW) {
