@@ -319,8 +319,8 @@ function Box(x, y, w, sym) {
   }
   this.display = function() {
     noFill();
-    strokeWeight(3);
-    stroke(255);
+    strokeWeight(2);
+    stroke(180);
     rect(this.x, this.y, this.w, this.w);
   }
   this.reset = function() {

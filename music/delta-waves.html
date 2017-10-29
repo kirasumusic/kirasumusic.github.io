@@ -148,22 +148,41 @@ fit-margin-bottom="0" />
 
 <footer class="footer">
   <div class="container">
-    <div class="arrow col-md-1">
-      <a href="rite-of-spring.html"><</a>
+    <div class="computerSongMenu">
+      <div class="arrow col-md-1">
+        <a href="rite-of-spring.html"><</a>
+      </div>
+      <div class="nowPlayingBox col-md-3">
+        <p class="nowPlayingText"><em>Now playing...</em></p>
+        <p class="songTitle">Delta Waves</p>
+      </div>
+      <div class="col-md-7 audioBox">
+        <audio id="myAudio" controls data-info-title="Delta Waves">
+          <source src="assets/deltaWaves.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
+      <div class="arrow col-md-1">
+        <a href="cycles.html">></a>
+      </div>
     </div>
-    <div class="nowPlayingBox col-md-3">
-      <p class="nowPlayingText"><em>Now playing...</em></p>
+  </div>
+  <div class="mobileSongMenu">
+    <div class="nowPlayingBox">
       <p class="songTitle">Delta Waves</p>
     </div>
-    <div class="col-md-7 audioBox">
-      <audio id="myAudio" controls data-info-title="Delta Waves">
+    <div class="arrow col-xs-2">
+      <a href="rite-of-spring.html"><</a>
+    </div>
+    <div class="audioBox col-xs-8">
+      <audio id="myAudioMobile" controls data-info-title="Delta Waves">
         <source src="assets/deltaWaves.mp3" type="audio/mpeg" />
       </audio>
     </div>
-    <div class="arrow col-md-1">
+    <div class="arrow col-xs-2">
       <a href="cycles.html">></a>
     </div>
   </div>
+
 </footer>
 <!--  testing -->
 <script src="js/bootstrap3_player.js"></script>

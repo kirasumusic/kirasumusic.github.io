@@ -11,6 +11,7 @@ body {
   margin-bottom: 85px;
 }
 
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -26,6 +27,8 @@ body {
   padding-right: 15px;
   padding-left: 15px;
 }
+
+
 
 .nowPlayingBox {
   line-height:150%;
@@ -56,4 +59,48 @@ body {
   color:blue;
   text-decoration:none;
   color:#fff;
+}
+
+.mobileSongMenu {
+  display:none;
+}
+
+
+@media screen and (max-width: 500px) {
+  .computerSongMenu {
+    display:none;
+  }
+
+  .mobileSongMenu {
+    display:inline-block;
+    width: 100%;
+  }
+
+  .songTitle {
+    font-size:130%;
+    text-align: center;
+    width:100%;
+    margin: 0 auto;
+  }
+
+  .nowPlayingBox {
+    width:100%;
+  }
+
+  .audioBox {
+    padding: 10px;
+  }
+
+  .playa section {
+    padding-left: 5px;
+  }
+
+  .arrow a{
+    position:relative;
+    top:0px;
+    height:100%;
+    font-size:210%;
+    color:#ddd;
+  }
+
 }

@@ -1,8 +1,3 @@
-#songPlayer {
-  position: absolute;
-  top: 150px;
-  left:50px;
-}
 
 .playa input[type="range"] {
   background-color: #ddd;
@@ -68,4 +63,8 @@ To Glyphicons (http://glyphicons.com/) for the Halflings glyphs font */
   to {
     transform: rotate(360deg);
   }
+}
+
+@media screen and (max-width: 500px) {
+
 }

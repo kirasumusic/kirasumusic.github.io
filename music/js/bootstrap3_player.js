@@ -1,4 +1,5 @@
 /* global jQuery */
+var seekID = 0;
 (function ($) {'use strict';
 $('audio[controls]').before(function () {
 
@@ -92,12 +93,13 @@ $('audio[controls]').before(function () {
   }; // addPlay
 
   var addSeek = function () {
+    seekID++;
     var seek = document.createElement('input');
     $(seek).attr({
       'type': 'range',
       'min': 0,
       'value': 0,
-      'class': 'seek'
+      'class': 'seek' + ' seekID' + seekID
     });
 
     seek.progress = function () {
@@ -164,7 +166,7 @@ $('audio[controls]').before(function () {
     };
 
     var seek_wrapper = document.createElement('div');
-    $(seek_wrapper).addClass('btn btn-default col-sm-3 hidden-xs');
+    $(seek_wrapper).addClass('btn btn-default col-sm-3');
     $(seek_wrapper).append(seek);
 
     // bind seek / position slider events
@@ -188,7 +190,7 @@ $('audio[controls]').before(function () {
   var addTime = function () {
     var time = document.createElement('button');
     $(time).attr('type','button');
-    $(time).addClass('btn btn-default col-sm-3');
+    $(time).addClass('btn btn-default col-sm-3 hidden-xs');
     //$(time).tooltip({'container': 'body', 'placement': 'right', 'html': true});
 
     time.twodigit = function (myNum) {
@@ -248,7 +250,7 @@ $('audio[controls]').before(function () {
   var addMute = function () {
     var mute = document.createElement('button');
     $(mute).attr('type','button');
-    $(mute).addClass('btn btn-default  col-sm-1');
+    $(mute).addClass('btn btn-default  col-sm-1 hidden-xs');
 
     mute.checkVolume = function () {
       if (song.volume > 0.5 && !song.muted) {
@@ -415,5 +417,12 @@ $('audio[controls]').before(function () {
 })(jQuery);
 
 window.onload = function() {
-  document.getElementById("myAudio").play();
+  if (window.width < 500) {
+    document.getElementById("myAudioMobile").play();
+    $( ".playa section" ).removeClass("col-sm-12");
+    $( ".playa section" ).removeClass("row");
+  }
+  else {
+    document.getElementById("myAudio").play();
+  }
 }

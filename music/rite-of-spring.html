@@ -43,8 +43,9 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="css/musicstyle.css">
   <link href="css/bootstrap3_player.css" rel="stylesheet">
-  <link href="css/sticky-footer-navbar.css" rel="stylesheet">
   <link href="css/canvasfull.css" rel="stylesheet">
+
+  <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
 </head>
 
@@ -149,19 +150,37 @@ fit-margin-bottom="0" />
 
 <footer class="footer">
   <div class="container">
-    <div class="arrow col-md-1">
-      <a href="kirasu.html"><</a>
+    <div class="computerSongMenu">
+      <div class="arrow col-md-1">
+        <a href="kirasu.html"><</a>
+      </div>
+      <div class="nowPlayingBox col-md-4">
+        <p class="nowPlayingText"><em>Now playing...</em></p>
+        <p class="songTitle">Rite of Spring</p>
+      </div>
+      <div class="col-md-6 audioBox">
+        <audio id="myAudio" controls data-info-title="Rite of Spring">
+          <source src="assets/riteOfSpring.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
+      <div class="arrow col-md-1">
+        <a href="delta-waves.html">></a>
+      </div>
     </div>
-    <div class="nowPlayingBox col-md-4">
-      <p class="nowPlayingText"><em>Now playing...</em></p>
+  </div>
+  <div class="mobileSongMenu">
+    <div class="nowPlayingBox">
       <p class="songTitle">Rite of Spring</p>
     </div>
-    <div class="col-md-6 audioBox">
-      <audio id="myAudio" controls data-info-title="Rite of Spring">
+    <div class="arrow col-xs-2">
+      <a href="kirasu.html"><</a>
+    </div>
+    <div class="audioBox col-xs-8">
+      <audio id="myAudioMobile" controls data-info-title="Rite of Spring">
         <source src="assets/riteOfSpring.mp3" type="audio/mpeg" />
       </audio>
     </div>
-    <div class="arrow col-md-1">
+    <div class="arrow col-xs-2">
       <a href="delta-waves.html">></a>
     </div>
   </div>
