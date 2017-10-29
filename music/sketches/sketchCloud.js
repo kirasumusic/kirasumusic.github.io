@@ -20,12 +20,24 @@ var thunderNum = 0;
 var ranTime = 0;
 var tTime = 20;
 
+var orchidGrowth = 0;
+var overOrchid = false;
+var orchid;
+var currentImageIndex = 0;
+var currentImage;
+var orchidImgs = [];
+var orchidIndex = 0;
 
 function preload() {
   backgroundImg = loadImage("assets/backgroundCloud.png");
+  orchid = loadImage("../assets/constellations/orchid.png");
   cloudImg = loadImage("assets/cloud.png");
   for (var i = 0; i < 7; i++) {
     rainImgs[i] = loadImage("assets/rain" + i + ".png");
+  }
+
+  for (var i = 0; i < 16; i++) {
+    orchidImgs[i] = loadImage("../assets/orchid/output-" + getNum(i*2+1) + ".jpg");
   }
 }
 
@@ -41,16 +53,29 @@ function setup() {
   for (var i = 0; i < 7; i++) {
     rainImgs[i].resize(rainImgs[i].width/2, rainImgs[i].height/2);
   }
+
+  //orchid.resize(orchid.width*.3, orchid.height*.3);
 }
 
 function draw() {
-  background(backgroundImg);
+  //background(backgroundImg);
+  //var title = "../assets/orchid/output-" + getNum(thunderNum) + ".jpg";
+  background(orchidImgs[orchidIndex]);
+  if (orchidIndex == 15) cloud.isRaining = false;
   checkThunder();
   if (!thunder) {
     fill(0);
     rect(0, 0, width, height);
   }
   cloud.render();
+  //image(orchid, 400, height-orchid.height);
+}
+
+
+function getNum(n) {
+  if (n/100 >= 1) return "0" + n;
+  else if (n/10 >= 1) return "00" + n;
+  return "000" + n;
 }
 
 function mousePressed() {
@@ -95,16 +120,29 @@ function Cloud(x, y) {
         this.raindrops[this.currentDrop].isFalling = true;
         this.raindrops[this.currentDrop].cloudMove(this.x, this.y);
       }
+      colorMode(HSB, 255);
+      if (overOrchid)  tint(0, 255, 255);
       for(var i = 0; i < 100; i++) {
         this.raindrops[i].render();
         this.raindrops[i].rain(5);
       }
+      noTint();
     }
     if (mouseIsPressed) {
-      var s = map(mouseX-this.x, 0, width, 0, 10);
-      this.x += s;
+      if (mouseX > this.x + cloudImg.height*.5) this.x+=4;
+      else if (mouseX < this.x + cloudImg.height*.5) this.x-=4;
+      // var s = map(mouseX-this.x, 0, width, 0, 10);
+      // this.x += s;
     }
     image(cloudImg, this.x, this.y);
+
+    // check orchid rain
+    if ((this.x + cloudImg.height*.5) > width/2 - 40 && (this.x + cloudImg.height*.5) < width/2 + 40) {
+      orchidGrowth++;
+      overOrchid = true;
+      if (orchidGrowth > 255) orchidGrowth = 255;
+    }
+    else overOrchid = false;
   }
 }
 
@@ -164,6 +202,8 @@ function checkThunder() {
         lastThunder = millis();
         thunder = false;
         thunderNum++;
+        orchidIndex++;
+        if(orchidIndex >= 16) orchidIndex = 15;
         if (thunderNum == 5) {
           thundering = false;
           thunderNum = 0;
