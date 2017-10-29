@@ -47,6 +47,8 @@
 
   <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
+
+
 </head>
 
 <body>
@@ -149,10 +151,10 @@ fit-margin-bottom="0" />
 
 
 <footer class="footer">
-  <div class="container">
+  <div class="container-fluid">
     <div class="computerSongMenu">
       <div class="arrow col-md-1">
-        <a href="kirasu.html"><</a>
+        <a class="left" href="kirasu.html"><</a>
       </div>
       <div class="nowPlayingBox col-md-4">
         <p class="nowPlayingText"><em>Now playing...</em></p>
@@ -164,7 +166,7 @@ fit-margin-bottom="0" />
         </audio>
       </div>
       <div class="arrow col-md-1">
-        <a href="delta-waves.html">></a>
+        <a class="right" href="delta-waves.html">></a>
       </div>
     </div>
   </div>
@@ -173,7 +175,7 @@ fit-margin-bottom="0" />
       <p class="songTitle">Rite of Spring</p>
     </div>
     <div class="arrow col-xs-2">
-      <a href="kirasu.html"><</a>
+      <a class="left" href="kirasu.html"><</a>
     </div>
     <div class="audioBox col-xs-8">
       <audio id="myAudioMobile" controls data-info-title="Rite of Spring">
@@ -181,13 +183,14 @@ fit-margin-bottom="0" />
       </audio>
     </div>
     <div class="arrow col-xs-2">
-      <a href="delta-waves.html">></a>
+      <a class="right" href="delta-waves.html">></a>
     </div>
   </div>
 </footer>
 
-<script src="js/bootstrap3_player.js"></script>
+
 <script src="../js/flock.js" type="text/javascript"></script>
+<script src="js/bootstrap3_player.js"></script>
 <script src="sketches/butterfly.js" type="text/javascript"></script>
 
 </body>

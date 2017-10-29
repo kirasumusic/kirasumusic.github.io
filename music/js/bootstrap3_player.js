@@ -44,7 +44,7 @@ $('audio[controls]').before(function () {
   var addPlay = function () {
     var play = document.createElement('button');
     $(play).attr('type','button');
-    $(play).addClass('btn  btn-default disabled col-sm-2');
+    $(play).addClass('btn  btn-default disabled col-sm-2 playButton');
 
     play.setPlayState = function (toggle) {
       $(play).removeClass('disabled');
@@ -190,7 +190,7 @@ $('audio[controls]').before(function () {
   var addTime = function () {
     var time = document.createElement('button');
     $(time).attr('type','button');
-    $(time).addClass('btn btn-default col-sm-3 hidden-xs');
+    $(time).addClass('btn btn-default col-md-3 hidden-sm hidden-xs');
     //$(time).tooltip({'container': 'body', 'placement': 'right', 'html': true});
 
     time.twodigit = function (myNum) {
@@ -250,7 +250,7 @@ $('audio[controls]').before(function () {
   var addMute = function () {
     var mute = document.createElement('button');
     $(mute).attr('type','button');
-    $(mute).addClass('btn btn-default  col-sm-1 hidden-xs');
+    $(mute).addClass('btn btn-default  col-md-1 hidden-sm hidden-xs');
 
     mute.checkVolume = function () {
       if (song.volume > 0.5 && !song.muted) {
@@ -299,7 +299,7 @@ $('audio[controls]').before(function () {
     };
 
     var vol_wrapper = document.createElement('div');
-    $(vol_wrapper).addClass('btn btn-default  col-sm-3  hidden-xs');
+    $(vol_wrapper).addClass('btn btn-default  col-md-3  hidden-sm hidden-xs');
     $(vol_wrapper).append(volume);
     $(volume).on('change', volume.slide);
     $(song).on('volumechange', volume.set);
@@ -417,10 +417,17 @@ $('audio[controls]').before(function () {
 })(jQuery);
 
 window.onload = function() {
-  if (window.width < 500) {
+  console.log(windowWidth);
+  if (windowWidth < 800) {
     document.getElementById("myAudioMobile").play();
-    $( ".playa section" ).removeClass("col-sm-12");
-    $( ".playa section" ).removeClass("row");
+    $( ".mobileSongMenu .playa section" ).removeClass("col-sm-12");
+    $( ".mobileSongMenu .playa section" ).removeClass("row");
+    $( ".mobileSongMenu input" ).parent().removeClass("col-sm-3");
+    $( ".mobileSongMenu input" ).parent().addClass("col-sm-9");
+    $( ".mobileSongMenu input" ).parent().addClass("col-xs-9");
+
+    $( ".playButton").css("border-top-left-radius", "4px");
+    $( ".playButton").css("border-bottom-left-radius", "4px");
   }
   else {
     document.getElementById("myAudio").play();

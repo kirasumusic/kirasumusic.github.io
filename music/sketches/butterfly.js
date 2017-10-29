@@ -10,10 +10,12 @@ var audio;
 var stars = [];
 var ellipseS = 0;
 var pulsing = false;
+var windowLoaded = false;
 
 function preload() {
   backgroundImg = loadImage("assets/delta/background.jpg");
-  bScale = map(windowWidth, 345, 1500, 345/1500*.5, .5);
+  if (windowWidth < 700) bScale = map(windowWidth, 345, 1500, 345/700*.5, .5);
+  else bScale = map(windowWidth, 345, 1500, 345/1500*.5, .5);
   butterflyParts.body[0] = new ButterflyPart(loadImage("assets/delta/butterfly_body.png"), -150, -450, false);
   butterflyParts.left[0] = new ButterflyPart(loadImage("assets/delta/bottomLeft.png"), -420, -30, true);
   butterflyParts.left[1] = new ButterflyPart(loadImage("assets/delta/topLeft.png"), -730, -180*3, true);
@@ -60,7 +62,7 @@ function draw() {
     }
     ellipseS+=3;
   }
-    stars.star();
+  stars.star();
 
   for (var i = 0; i < butterflyParts.left.length; i++) {
     butterflyParts.left[i].display();
@@ -116,25 +118,26 @@ function ButterflyPart(img, x, y, dir) {
     var showT = 2;
     var hideT = 1;
 
+    if (windowLoaded) {
 
-    if (audio.currentTime > startT && (audio.currentTime < endT)) {
-      if (this.show && (millis() - this.lastChecked > showT)) {
-        console.log(3);
-        this.show = false;
-        this.lastChecked = millis();
+
+      if (audio.currentTime > startT && (audio.currentTime < endT)) {
+        if (this.show && (millis() - this.lastChecked > showT)) {
+          this.show = false;
+          this.lastChecked = millis();
+        }
+        else if (!this.show && (millis() - this.lastChecked > hideT)) {
+          this.randomize();
+          this.show = true;
+          this.lastChecked = millis();
+        }
       }
-      else if (!this.show && (millis() - this.lastChecked > hideT)) {
-        console.log(2);
-        this.randomize();
+      else if (audio.currentTime > endT) {
         this.show = true;
-        this.lastChecked = millis();
       }
-    }
-    else if (audio.currentTime > endT) {
-      this.show = true;
-    }
 
-    if (this.show) image(this.img, this.x, this.y);
+      if (this.show) image(this.img, this.x, this.y);
+    }
   }
   this.mouseOver = function() {
     if (!this.hasSnapped) {
@@ -240,7 +243,20 @@ function mousePressed() {
 }
 
 window.onload = function() {
-  audio = document.getElementById('myAudio');
+  windowLoaded = true;
+  if (window.width < 800) {
+    audio = document.getElementById("myAudioMobile");
+    $( ".mobileSongMenu .playa section" ).removeClass("col-sm-12");
+    $( ".mobileSongMenu .playa section" ).removeClass("row");
+    $( ".mobileSongMenu input" ).parent().removeClass("col-sm-3");
+    $( ".mobileSongMenu input" ).parent().addClass("col-sm-9");
+    $( ".mobileSongMenu input" ).parent().addClass("col-xs-9");
+    $( ".playButton").css("border-top-left-radius", "4px");
+    $( ".playButton").css("border-bottom-left-radius", "4px");
+  }
+  else {
+    audio = document.getElementById("myAudio");
+  }
   audio.play();
 }
 
