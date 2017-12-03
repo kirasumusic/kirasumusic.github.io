@@ -28,6 +28,8 @@ var currentImage;
 var orchidImgs = [];
 var orchidIndex = 0;
 
+var musicplayer;
+
 function preload() {
   backgroundImg = loadImage("assets/backgroundCloud.png");
   orchid = loadImage("../assets/constellations/orchid.png");
@@ -39,6 +41,8 @@ function preload() {
   for (var i = 0; i < 16; i++) {
     orchidImgs[i] = loadImage("../assets/orchid/output-" + getNum(i*2+1) + ".jpg");
   }
+
+  musicplayer = new MusicPlayer("Cycles", "cycles", "delta-waves", "song-for-m");
 }
 
 function setup() {
@@ -53,8 +57,9 @@ function setup() {
   for (var i = 0; i < 7; i++) {
     rainImgs[i].resize(rainImgs[i].width/2, rainImgs[i].height/2);
   }
-
   //orchid.resize(orchid.width*.3, orchid.height*.3);
+  musicplayer.update(50, height - 100);
+  showOnLoad();
 }
 
 function draw() {
@@ -69,6 +74,8 @@ function draw() {
   }
   cloud.render();
   //image(orchid, 400, height-orchid.height);
+
+  musicplayer.display();
 }
 
 
@@ -81,9 +88,11 @@ function getNum(n) {
 function mousePressed() {
   // var navMain = $(".navbar-collapse"); // avoid dependency on #id
   // navMain.collapse('hide');
+  musicplayer.mouseClick();
 }
 
 function mouseReleased() {
+  musicplayer.mouseRelease();
 }
 
 function mouseDragged() {
@@ -121,6 +130,8 @@ function Cloud(x, y) {
         this.raindrops[this.currentDrop].cloudMove(this.x, this.y);
       }
       colorMode(HSB, 255);
+
+      //TODO
       if (overOrchid)  tint(0, 255, 255);
       for(var i = 0; i < 100; i++) {
         this.raindrops[i].render();

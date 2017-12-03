@@ -4,26 +4,43 @@ body {
   background-color: black;
 
   color:white;
-  font-family: 'Quicksand', sans-serif;
+  font-family: MoonLight;
+  /*'Quicksand', sans-serif;*/
 }
 
+@font-face {
+    font-family: MoonLight;
+    src: url("../fonts/Moon Light.otf") format("opentype");
+}
 
-#container {
+@font-face {
+    font-family: MoonBold;
+    src: url("../fonts/Moon Bold.otf") format("opentype");
+}
+
+/*#container {
   position:fixed;
   height:100%;
   width:100%;
 }
 
 #container {
-position: absolute;
-padding:50px;
-top:140px;
-font-family: 'Quicksand', sans-serif;
+  position: absolute;
+  padding:50px;
+  top:140px;
+  font-family: MoonLight;
+}*/
+
+h1 {
+  font-family: MoonLight;
+  letter-spacing: 25px;
+  font-size: 30px;
 }
 
 p {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 150%;
+  font-family: MoonLight;
+  font-size: 13px;
+  letter-spacing: 10px;
 }
 
 #p5_loading {
@@ -35,17 +52,11 @@ p {
   bottom: 0;
   left: 0;
   right: 0;
-  font-size: 400%;
-
+  font-size: 30px;
+  letter-spacing: 25px;
+  text-indent: 22px;
   margin: auto;
 }
-
-/*.container {
-  font-family: 'Quicksand', sans-serif;
-  padding-top:200px;
-  color:white;
-  background-color: transparent;
-}*/
 
 .showing {
   display: inline;
@@ -65,10 +76,10 @@ canvas {
   z-index:-100;
 }
 
-@font-face {
+/*@font-face {
   font-family: 'Bazar';
   src: url('fonts/Bazar.ttf');
-}
+}*/
 
 .navbar {
   z-index: 1;
@@ -85,7 +96,7 @@ canvas {
 }
 .navbar-collapse.collapse {
   display: none!important;
-  width: 150px;
+  width: 250px;
   float: right;
 }
 
@@ -94,8 +105,11 @@ canvas {
 }
 .navbar-nav>li {
   float: none;
+  letter-spacing: 10px;
   text-align: right;
   padding-right:30px;
+  padding-bottom:10px;
+  font-size: 21px;
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -116,13 +130,23 @@ canvas {
 }
 
 .navbar-inverse .navbar-toggle {
-  border-color: #fff;
-  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0);
+}
+
+.navbar-inverse .navbar-toggle:hover {
+  border-color: white;
+  background: rgba(0, 0, 0, 0);
+}
+
+.navbar-inverse .navbar-toggle:active {
+  border-color: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0);
 }
 
 .navbar-brand {
   font-size: 400%;
-  font-family: 'Quicksand', sans-serif;
+  font-family: MoonLight;
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
   border-color: transparent;
@@ -136,8 +160,8 @@ a#homePageLogo, a#logo {
   position: fixed;
   top:30px;
   left:50px;
-  width:224px;
-  height:107px;
+  width:167px;
+  height:78px;
   z-index: 2000;
 }
 
@@ -146,20 +170,22 @@ a#homePageLogo, a#logo {
 }
 
 #logo svg, #homePageLogo svg {
-  width:224px;
-  height:107px;
+  width:167px;
+  height:78px;
 }
 
 #logo svg g, #homePageLogo svg g {
-  transform: scale(.08);
+  transform: scale(.06);
 }
 #logo svg path, #homePageLogo svg path {
+  fill:#A9A9A9;
+}
+#logo svg:hover path, #homePageLogo svg:hover path {
   fill:white;
-
 }
 
 nav {
-  font-family: 'Quicksand', sans-serif;
+  font-family: MoonLight;
 }
 
 .white, .white a {
@@ -185,10 +211,21 @@ nav {
 }
 
 .navbar-btn {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
   height:35px;
   width:45px;
+}
+
+.navbar-btn:active {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: white;
+}
+
+
+.navbar-btn:hover {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: white;
 }
 
 
@@ -250,4 +287,8 @@ nav {
 
 .navbarBlk {
   background-color: black;
+}
+
+.showOnLoad {
+  visibility: hidden;
 }

@@ -55,7 +55,8 @@ function preload() {
   constellationImgs[constID.whale.id] = loadImage("assets/constellations/whale.png");
   constellationImgs[constID.handeye.id] = loadImage("assets/constellations/handeye.png");
   constellationImgs[constID.owl.id] = loadImage("assets/constellations/owl.png");
-  //fontReg = loadFont("");
+  fontReg = loadFont("../fonts/Moon Light.otf");
+
 }
 
 function setup() {
@@ -83,7 +84,7 @@ function setup() {
     var b = new Boid(random(-2000,2200),random(height), i);
     stars.addBoid(b);
   }
-  textFont("Quicksand");
+  // textFont();
   // ---------------------- id, name, x, y, tx, ty, trot, rot, rad, sc
   setupConstellations();
 }
@@ -224,6 +225,7 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     this.getTint();
     image(constellationImgs[this.id], 0, 0);
     pop();
+    textFont(fontReg);
     textSize(30);
     if (this.mouseOver()) {
       fill(width);
@@ -235,13 +237,19 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     }
 
     push();
-    //translate(this.tx, this.ty);
-    text(this.song, 0, 0);
+    this.drawText(this.song, 30, 1, 0, 0);
     pop();
-
 
     this.drawStars();
     pop();
+  }
+  this.drawText = function(word, fsize, fspacing, x, y) {
+    textFont(fontReg);
+    textSize(fsize);
+    var sp = 0;
+    for (var i=0; i < word.length; i++) {
+      text(word.charAt(i), x + (fsize + fspacing)*i - textWidth(word)/2, y);
+    }
   }
   this.drawStars = function() {
     //for(var j = 5; j > 0; j--) {

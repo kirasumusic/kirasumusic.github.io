@@ -20,6 +20,8 @@ var boxes = [];
 var allMatched = false;
 
 var lastTouched = "top";
+var musicplayer;
+
 
 function preload() {
   for (var i = 0; i < 5; i++ ) {
@@ -34,6 +36,8 @@ function preload() {
   // items[2] = loadImage("assets/hand/orchid.png");
   handShadow = loadImage("assets/hand/hand2_shadow.png");
   handSansShadow = loadImage("assets/hand/hand2_sans_shadow.png");
+
+  musicplayer = new MusicPlayer("Delta Waves", "deltaWaves", 'rite-of-spring', "cycles");
 }
 
 function setup() {
@@ -49,6 +53,8 @@ function setup() {
     var rs = items[0].height*itemsScale[0];
     boxes[i] = new Box(width/2+rs*(-1.5+i), 150, rs, i);
   }
+  musicplayer.update(50, height - 100);
+  showOnLoad();
 }
 
 function draw() {
@@ -70,6 +76,7 @@ function draw() {
     stars[i].mouseOver();
     stars[i].move();
   }
+  musicplayer.display();
 }
 
 function rotateOnMouse() {

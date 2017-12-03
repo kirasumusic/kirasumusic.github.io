@@ -8,6 +8,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  select('.container').style("visibility", "visible");
 }
 
 function draw() {

@@ -4,10 +4,14 @@ var img1, img2;
 var dressClicked = false;
 var dressTime = 0;
 
+var musicplayer;
+
 function preload() {
   starryNight = loadImage("../assets/skydress.jpg");
   img1 = loadImage("../assets/birds/forward.png");
   img2 = loadImage("../assets/birds/dive.png");
+
+  musicplayer = new MusicPlayer("Song For M", "songForM", 'cycles', "kirasu");
 }
 
 function setup() {
@@ -66,6 +70,10 @@ function setup() {
     }
   });
 
+
+  musicplayer.update(50, height - 100);
+  showOnLoad();
+
 }
 
 function draw() {
@@ -94,6 +102,9 @@ function draw() {
   //   stars.changeMode(mode.flying);
   //   stars.bird();
   // }
+  angleMode(RADIANS);
+  musicplayer.display();
+  angleMode(DEGREES);
 }
 
 function overDress() {

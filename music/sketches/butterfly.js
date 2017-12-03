@@ -6,11 +6,11 @@ var mode = 0;
 var currSelected = false;
 var bScale = .4;
 var movingApart = true;
-var audio;
 var stars = [];
 var ellipseS = 0;
 var pulsing = false;
 var windowLoaded = false;
+var musicplayer;
 
 function preload() {
   backgroundImg = loadImage("assets/delta/background.jpg");
@@ -28,6 +28,8 @@ function preload() {
   butterflyParts.right[3] = new ButterflyPart(loadImage("assets/delta/topRight_0.png"), 300, -650, true);
   butterflyParts.right[4] = new ButterflyPart(loadImage("assets/delta/topRight_1.png"), 450, -580, true);
   //butterflyParts.right[5] = new ButterflyPart(loadImage("assets/delta/middleRight.png"), windowWidth/2+280, windowHeight/2, true);
+
+  musicplayer = new MusicPlayer("Rite of Spring", "riteOfSpring", "kirasu", "delta-waves");
 }
 
 function setup() {
@@ -48,11 +50,14 @@ function setup() {
     var b = new Boid(random(width),random(height), i);
     stars.addBoid(b);
   }
+  musicplayer.update(50, height - 100);
+  showOnLoad();
 }
 
 
 
 function draw() {
+  if (!windowLoaded) windowLoaded = true;
   background(backgroundImg);
   if (pulsing) {
     noStroke();
@@ -83,6 +88,8 @@ function draw() {
   // butterflyParts.body[0].display();
   //butterflyParts.body[0].move();
   //image(butterflyParts.body[0].img, butterflyParts.body[0].x, butterflyParts.body[0].y, butterflyParts.body[0].img.width*bScale, butterflyParts.body[0].img.height*bScale);
+
+    musicplayer.display();
 }
 
 
@@ -119,9 +126,7 @@ function ButterflyPart(img, x, y, dir) {
     var hideT = 1;
 
     if (windowLoaded) {
-
-
-      if (audio.currentTime > startT && (audio.currentTime < endT)) {
+      if (sound.currentTime() > startT && (sound.currentTime() < endT)) {
         if (this.show && (millis() - this.lastChecked > showT)) {
           this.show = false;
           this.lastChecked = millis();
@@ -132,7 +137,7 @@ function ButterflyPart(img, x, y, dir) {
           this.lastChecked = millis();
         }
       }
-      else if (audio.currentTime > endT) {
+      else if (sound.currentTime() > endT) {
         this.show = true;
       }
 
@@ -242,23 +247,23 @@ function mousePressed() {
   }
 }
 
-window.onload = function() {
-  windowLoaded = true;
-  if (window.width < 800) {
-    audio = document.getElementById("myAudioMobile");
-    $( ".mobileSongMenu .playa section" ).removeClass("col-sm-12");
-    $( ".mobileSongMenu .playa section" ).removeClass("row");
-    $( ".mobileSongMenu input" ).parent().removeClass("col-sm-3");
-    $( ".mobileSongMenu input" ).parent().addClass("col-sm-9");
-    $( ".mobileSongMenu input" ).parent().addClass("col-xs-9");
-    $( ".playButton").css("border-top-left-radius", "4px");
-    $( ".playButton").css("border-bottom-left-radius", "4px");
-  }
-  else {
-    audio = document.getElementById("myAudio");
-  }
-  audio.play();
-}
+// window.onload = function() {
+//   windowLoaded = true;
+//   if (window.width < 800) {
+//     audio = document.getElementById("myAudioMobile");
+//     $( ".mobileSongMenu .playa section" ).removeClass("col-sm-12");
+//     $( ".mobileSongMenu .playa section" ).removeClass("row");
+//     $( ".mobileSongMenu input" ).parent().removeClass("col-sm-3");
+//     $( ".mobileSongMenu input" ).parent().addClass("col-sm-9");
+//     $( ".mobileSongMenu input" ).parent().addClass("col-xs-9");
+//     $( ".playButton").css("border-top-left-radius", "4px");
+//     $( ".playButton").css("border-bottom-left-radius", "4px");
+//   }
+//   else {
+//     audio = document.getElementById("myAudio");
+//   }
+//   audio.play();
+// }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);

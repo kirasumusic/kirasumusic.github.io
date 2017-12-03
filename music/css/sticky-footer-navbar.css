@@ -9,26 +9,35 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 85px;
+  height: 100%;
 }
 
 
 .footer {
-  position: absolute;
+  /*position: absolute;
   bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 90px;
-  background-color: rgba(0, 0, 0, .6);
-  border-color: rgba(255, 255, 255, 0);
+  width: 100%;*/
+  /* Set the fixed height of the footer here
+  height: 150px;*/
+  /*padding:10px;
+  width:100%;*/
+  width:100%;
 }
 
-.footer > .container-fluid {
-  padding-top: 10px;
-  padding-right: 15px;
-  padding-left: 15px;
+.footer .container-fluid {
+  /*padding-top: 10px;
+  padding-right: 35px;
+  padding-left: 35px;*/
+
 }
 
-
+hr.songLine {
+  position: absolute;
+  bottom: 90px;
+  border-top: 1px solid white;
+  width:90%;
+  margin-left: 5%;
+}
 
 .nowPlayingBox {
   line-height:150%;
@@ -37,84 +46,71 @@ body {
   font-size: 1.5vw;
 }
 
-.audioBox {
-  position:relative;
-  padding-top:25px;
+#songPlayerBox {
+  width: 100%;
+}
+
+.songNowPlaying {
+  position: absolute;
+  bottom: 60px;
+  left: 10%;
+  font-size: 18px;
+  letter-spacing: 5px;
+  text-align: center;
+  width: auto;
 }
 
 .songTitle {
-  font-style: normal;
-  /*font-size:300%;*/
-  font-size: 3vw;
+  position: absolute;
+  bottom: 20px;
+  left: 10%;
+  font-size: 30px;
+  letter-spacing: 5px;
+  text-align: center;
+  width: auto;
 }
 
-.arrow a{
-  position:relative;
-  top:10px;
-  height:100%;
-  font-size:250%;
-  color:#ddd;
-}
-
-.arrow a.right {
-  float:right;
-}
-
-.arrow a.left{
-  float:left;
-}
-
-.arrow a:hover {
-  color:blue;
-  text-decoration:none;
-  color:#fff;
-}
-
-.mobileSongMenu {
-  display:none;
-}
-
-@media screen and (max-width: 800px) {
-  .computerSongMenu {
-    display:none;
+@media (max-width: 1200px) {
+  .songNowPlaying {
+    display: none;
   }
-
-  .mobileSongMenu {
-    display:inline-block;
-    width: 100%;
-  }
-
   .songTitle {
-    font-size:4vw;
+    position: absolute;
+    bottom: 70px;
+    width: 100%;
+    letter-spacing: 5px;
+    font-size: 13px;
+    left: auto;
     text-align: center;
-    width:100%;
-    margin: 0 auto;
   }
+}
 
-  .nowPlayingBox {
-    width:100%;
-  }
+.audioBtn img {
+  width:50px;
+  height:50px;
+}
 
+.musicplayer {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+}
 
-  .audioBox {
-    padding: 10px;
-  }
+.musicplayer:hover {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+}
 
-  .playa section {
-    width:100%;
-  }
+.musicplayer:active {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+}
 
-  .arrow a{
-    position:relative;
-    top:0px;
-    height:100%;
-    font-size:210%;
-    color:#ddd;
-  }
-
-  .playButton {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-  }
-
+.arrow {
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 30px;
 }

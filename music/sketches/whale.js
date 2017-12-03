@@ -9,6 +9,8 @@ var starImgs = [];
 var stars = [];
 var bubbleImg;
 
+var musicplayer;
+
 function preload() {
   whale = loadImage("assets/kirasu/whale.png");
   ocean = loadImage("assets/kirasu/bluewavesflat.png");
@@ -21,6 +23,8 @@ function preload() {
     items[i] = loadImage("assets/hand/const" + i + "_blk.svg");
     starImgs[i] = loadImage("assets/hand/const" + i + "_w.svg");
   }
+
+  musicplayer = new MusicPlayer("When the Moon Comes", "kirasu", 'song-for-m', "rite-of-spring");
 }
 
 function setup() {
@@ -43,6 +47,9 @@ function setup() {
   for (var i = 0; i < 20; i++ ) {
     stars[i] = new Star(i%6);
   }
+
+  musicplayer.update(50, height - 100);
+  showOnLoad();
 }
 
 function draw() {
@@ -66,6 +73,8 @@ function draw() {
     stars[i].display();
     stars[i].move();
   }
+
+  musicplayer.display();
 }
 
 

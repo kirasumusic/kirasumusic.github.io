@@ -1,7 +1,9 @@
 
 .playa input[type="range"] {
   background-color: #ddd;
-  border: 1px solid #bbb;
+  border-top: 1px solid #bbb;
+  border-right: 0px;
+  border-left: 0px;
   border-radius: 0.5em;
   opacity: 1;
   height: 1em;
