@@ -217,9 +217,11 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     return false;
   }
   this.touchOver = function () {
-    for (var i = 0; i < touches.length; i++) {
-      var d = dist(touches[i].x, touches[i].y, this.x + view.x, this.y+view.y);
-      if (d < this.rad*3) return true;
+    var x = this.x + view.x;
+    var y = this.y + view.y;
+    if (mouseX > x - 200 && mouseX < x + 200 && mouseY > y - 150 && mouseY < y + 150) {
+      console.log("touch worrrk");
+      return true;
     }
     return false;
   }
@@ -253,10 +255,6 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     textFont(fontReg);
     textSize(30);
     if (this.mouseOver()) {
-      if (mobile) {
-        if (mouseY > this.y - 150 && mouseY < this.y + 150)
-        window.location.replate('music/'+constellations[this.id].url);
-      }
       fill(width);
       stroke(width);
     }
@@ -320,35 +318,40 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
 }
 
 function mouseClicked() {
-  for (var i = 0; i < constellations.length; i++) {
-    if (constellations[i].mouseOver()) {
-      window.location.href='music/'+constellations[i].url;
+  if (!isMobile) {
+    for (var i = 0; i < constellations.length; i++) {
+      if (constellations[i].mouseOver()) {
+        window.location.href='music/'+constellations[i].url;
+      }
     }
   }
 }
 
 function touchStarted() {
+  console.log("true");
   touchTime = millis();
   dragStart.x = mouseX;
   dragStart.y = mouseY;
   dragging = true;
 }
 
-function touchReleased() {
-  if (millis() - touchTime < 300) {
+function touchEnded() {
+  dragging = false;
+  if (isMobile) {
+    view.x = viewTemp.x;
+    view.y = viewTemp.y;
+  }
+  if (millis() - touchTime < 100) {
+    console.log("why")
     for (var i = 0; i < constellations.length; i++) {
       if (constellations[i].touchOver()) {
         window.location.href='music/'+constellations[i].url;
       }
     }
   }
-  else {
-    dragging = false;
-    if (isMobile) {
-      view.x = viewTemp.x;
-      view.y = viewTemp.y;
-    }
-  }
+
+
+
 }
 function setupConstellations() {
   var x = width/2;

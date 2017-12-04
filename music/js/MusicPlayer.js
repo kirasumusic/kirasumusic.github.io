@@ -148,7 +148,6 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
   this.display = function() {
     if (this.isBig) this.displayBig();
     else this.displaySmall();
-    console.log(this.w - 400);
   }
   this.displayTitle = function() {
     textFont(this.myFont);
