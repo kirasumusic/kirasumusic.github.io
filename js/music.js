@@ -121,12 +121,12 @@ function getMouseMove() {
   if (mouseX > windowWidth*3/4) {
     var speed = map(mouseX, windowWidth*3/4, windowWidth, 1, 35);
     view.x-= speed;
-    if (view.x < -800) view.x = -800;
+    if (view.x < -400) view.x = -400;
   }
   else if (mouseX < windowWidth/4) {
     var speed = map(mouseX, windowWidth/4, 0, 1, 35);
     view.x+= speed;
-    if (view.x > 2000) view.x = 2000;
+    if (view.x > 1800) view.x = 1800;
   }
 }
 
