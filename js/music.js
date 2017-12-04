@@ -17,10 +17,12 @@ var dragging = false;
 var isMobile = false;
 
 var touchTime = 0;
+var divs = [];
 
 var song;
 var audio;
 var audioReady = false;
+
 
 var constID = {
   orchid: {
@@ -59,6 +61,20 @@ function preload() {
   constellationImgs[constID.owl.id] = loadImage("assets/constellations/owl.png");
   fontReg = loadFont("../fonts/Moon Light.otf");
 
+  // divs[constID.owl.id] = createA("Song For M");
+  // divs[constID.owl.id].class("songs");
+  //
+  // divs[constID.handeye.id] = createA("Delta Waves");
+  // divs[constID.handeye.id].class("songs");
+  //
+  // divs[constID.moth.id] = createA("Rite of Spring");
+  // divs[constID.moth.id].class("songs");
+  //
+  // divs[constID.whale.id] = createA("When the Moon Comes");
+  // divs[constID.whale.id].class("songs");
+  //
+  // divs[constID.orchid.id] = createA("Cycles");
+  // divs[constID.orchid.id].class("songs");
 }
 
 function setup() {
@@ -225,7 +241,7 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     //ellipse(this.x,this.y, this.rad*6);
 
     push();
-
+    // divs[this.id].position(this.x, 100);
     translate(this.x, this.y);
 
     push();
@@ -237,6 +253,9 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     textFont(fontReg);
     textSize(30);
     if (this.mouseOver()) {
+      if (mobile) {
+        window.location.href='music/'+constellations[this.id].url;
+      }
       fill(width);
       stroke(width);
     }
