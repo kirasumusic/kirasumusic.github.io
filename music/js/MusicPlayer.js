@@ -5,7 +5,7 @@ var lastVol = 1;
 var buttonPlay, buttonMute, sound, arrowLeft, arrowRight, nextS, previousS, songTitleDiv, songPlayingDiv;
 var hasLoaded = false;
 
-function MusicPlayer(songTitle, songFile, ns, ps) {
+function MusicPlayer(songTitle, songFile, ps, ns) {
   this.x = -1000;
   this.y = -1000;
   this.h = 35;
