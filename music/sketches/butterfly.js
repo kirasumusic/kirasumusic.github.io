@@ -29,7 +29,7 @@ function preload() {
   butterflyParts.right[4] = new ButterflyPart(loadImage("assets/delta/topRight_1.png"), 450, -580, true);
   //butterflyParts.right[5] = new ButterflyPart(loadImage("assets/delta/middleRight.png"), windowWidth/2+280, windowHeight/2, true);
 
-  musicplayer = new MusicPlayer("Rite of Spring", "riteOfSpring", "kirasu", "delta-waves");
+  musicplayer = new MusicPlayer("Rite of Spring", "riteOfSpring", "kirasu", "cycles");
 }
 
 function setup() {
