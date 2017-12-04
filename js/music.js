@@ -16,6 +16,8 @@ var maxTransY = 800;
 var dragging = false;
 var isMobile = false;
 
+var touchTime = 0;
+
 var song;
 var audio;
 var audioReady = false;
@@ -198,6 +200,13 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     if (this.getDistance() < this.rad*3) return true;
     return false;
   }
+  this.touchOver = function () {
+    for (var i = 0; i < touches.length; i++) {
+      var d = dist(touches[i].x, touches[i].y, this.x + view.x, this.y+view.y);
+      if (d < this.rad*3) return true;
+    }
+    return false;
+  }
   this.getDistance = function () {
     var x;
     if (dragging) {
@@ -298,6 +307,29 @@ function mouseClicked() {
   }
 }
 
+function touchStarted() {
+  touchTime = millis();
+  dragStart.x = mouseX;
+  dragStart.y = mouseY;
+  dragging = true;
+}
+
+function touchReleased() {
+  if (millis() - touchTime < 300) {
+    for (var i = 0; i < constellations.length; i++) {
+      if (constellations[i].touchOver()) {
+        window.location.href='music/'+constellations[i].url;
+      }
+    }
+  }
+  else {
+    dragging = false;
+    if (isMobile) {
+      view.x = viewTemp.x;
+      view.y = viewTemp.y;
+    }
+  }
+}
 function setupConstellations() {
   var x = width/2;
   var y = height/2;

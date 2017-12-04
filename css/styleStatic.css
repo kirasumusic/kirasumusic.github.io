@@ -39,4 +39,12 @@ section#about p {
     column-count: 1;
     column-gap: 40px;
   }
+
+  section#about p {
+    letter-spacing: 6px;
+    font-size: 13px;
+    line-height: 300%;
+    text-align: left;
+    hyphens: manual;
+  }
 }
