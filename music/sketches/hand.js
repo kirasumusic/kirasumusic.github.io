@@ -37,7 +37,7 @@ function preload() {
   handShadow = loadImage("assets/hand/hand2_shadow.png");
   handSansShadow = loadImage("assets/hand/hand2_sans_shadow.png");
 
-  musicplayer = new MusicPlayer("Delta Waves", "deltaWaves", 'rite-of-spring', "cycles");
+  musicplayer = new MusicPlayer("Delta Waves", "deltaWaves", 'cycles', "song-for-m");
 }
 
 function setup() {
@@ -384,9 +384,9 @@ function checkForMatches() {
 
 function keyPressed() {
   if (keyCode == LEFT_ARROW) {
-    window.location.href='rite-of-spring.html';
+    window.location.href='cycles.html';
   }
   else if (keyCode == RIGHT_ARROW) {
-    window.location.href='cycles.html';
+    window.location.href='song-for-m.html';
   }
 }

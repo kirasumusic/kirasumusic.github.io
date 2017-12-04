@@ -22,16 +22,16 @@ var audioReady = false;
 
 var constID = {
   orchid: {
-    id: 1, song: "Cycles", url: "cycles.html"
+    id: 0, song: "Cycles", url: "cycles.html"
   },
   moth: {
     id:4, song: "Rite of Spring", url: "rite-of-spring.html"
   },
   whale: {
-    id: 3, song: "Kirasu", url: "kirasu.html"
+    id: 3, song: "When the Moon Comes", url: "kirasu.html"
   },
   handeye: {
-    id:0, song: "Delta Waves", url: "delta-waves.html"
+    id:1, song: "Delta Waves", url: "delta-waves.html"
   },
   owl: {
     id:2, song: "Song for M", url:"song-for-m.html"

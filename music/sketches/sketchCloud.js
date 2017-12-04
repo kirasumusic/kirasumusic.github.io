@@ -42,7 +42,7 @@ function preload() {
   //   orchidImgs[i] = loadImage("../assets/orchid/output-" + getNum(i*2+1) + ".jpg");
   // }
 
-  musicplayer = new MusicPlayer("Cycles", "cycles", "delta-waves", "song-for-m");
+  musicplayer = new MusicPlayer("Cycles", "cycles", "rite-of-spring", "delta-waves");
 }
 
 function setup() {
@@ -229,9 +229,9 @@ function checkThunder() {
 
 function keyPressed() {
   if (keyCode == LEFT_ARROW) {
-    window.location.href='delta-waves.html';
+    window.location.href='rite-of-spring.html';
   }
   else if (keyCode == RIGHT_ARROW) {
-    window.location.href='song-for-m.html';
+    window.location.href='delta-waves.html';
   }
 }

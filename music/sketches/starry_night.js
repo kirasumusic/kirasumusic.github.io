@@ -11,7 +11,7 @@ function preload() {
   img1 = loadImage("../assets/birds/forward.png");
   img2 = loadImage("../assets/birds/dive.png");
 
-  musicplayer = new MusicPlayer("Song For M", "songForM", 'cycles', "kirasu");
+  musicplayer = new MusicPlayer("Song For M", "songForM", 'delta-waves', "kirasu");
 }
 
 function setup() {
@@ -128,7 +128,7 @@ function windowResized() {
 
 function keyPressed() {
   if (keyCode == LEFT_ARROW) {
-    window.location.href='cycles.html';
+    window.location.href='delta-waves.html';
   }
   else if (keyCode == RIGHT_ARROW) {
     window.location.href='kirasu.html';
