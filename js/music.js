@@ -254,6 +254,7 @@ function Constellation(id, song, url, tx, ty, trot, rot, rad, sc, scorig, points
     textSize(30);
     if (this.mouseOver()) {
       if (mobile) {
+        if (mouseY > height/2 - 150 && mouseY < height/2 + 150)
         window.location.href='music/'+constellations[this.id].url;
       }
       fill(width);
