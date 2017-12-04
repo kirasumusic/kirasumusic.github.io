@@ -58,7 +58,8 @@ function draw() {
   background(moon);
   imageMode(CENTER);
   //image(whale, width/2+50*(whale.width/origW), height/2+30+10*sin(millis()/600));
-  image(whale, mouseX + whale.width/3, height/2+30+10*sin(millis()/600));
+  //image(whale, mouseX + whale.width/3, height/2+30+10*sin(millis()/600));
+  image(whale, width/2, height/2+30+10*sin(millis()/600));
   for(var i = 0; i < bubbles.length; i++) {
     bubbles[i].display();
     bubbles[i].mouseOver();
@@ -208,7 +209,8 @@ function Bubble() {
     // else this.x = windowWidth/2 - 260 + 50;
     //this.x = mouseX+ whale.width/3 - (windowWidth/2 - 260 - 40) ;
     //this.x = mouseX + whale.width/3 + whale.width*.1;
-    this.x = mouseX + whale.width*.082;
+    //this.x = mouseX + whale.width*.082;
+    this.x = width/2 - whale.width*.25;
     this.symbolOver();
   }
   this.y = height/2+30+10*sin(millis()/600)-70;

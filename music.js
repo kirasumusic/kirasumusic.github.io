@@ -24,7 +24,7 @@ var constID = {
     id:1, song: "Rite of Spring", url: "rite-of-spring.html"
   },
   whale: {
-    id: 2, song: "Kirasu", url: "kirasu.html"
+    id: 2, song: "When the Moon Comes", url: "kirasu.html"
   },
   handeye: {
     id:3, song: "Delta Waves", url: "delta-waves.html"

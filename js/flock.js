@@ -11,6 +11,12 @@ Flock.prototype.star = function() {
   }
 }
 
+Flock.prototype.blackStar = function() {
+  for (var i = 0; i < this.boids.length; i++) {
+    this.boids[i].blackStar(this.boids);  // Passing the entire list of boids to each boid individually
+  }
+}
+
 Flock.prototype.bird = function() {
   for (var i = 0; i < this.boids.length; i++) {
     this.boids[i].bird(this.boids);  // Passing the entire list of boids to each boid individually
@@ -73,6 +79,11 @@ Boid.prototype.avoidIsland = function() {
 
 Boid.prototype.star = function(boids) {
   this.renderStar();
+  this.twinkle();
+}
+
+Boid.prototype.blackStar = function(boids) {
+  this.renderBlackStar();
   this.twinkle();
 }
 
@@ -205,6 +216,34 @@ Boid.prototype.renderStar = function() {
     pop();
   }
 }
+
+Boid.prototype.renderBlackStar = function() {
+  // Draw a triangle rotated in the direction of velocity
+  if(this.isShowing) {
+    colorMode(HSB, 100);
+    fill(0, 70);
+    stroke(0, 70);
+
+    push();
+    translate(this.position.x,this.position.y);
+    rotate(this.angle);
+    scale(this.scale);
+    beginShape();
+    vertex(0, 47);
+    vertex(53, 70);
+    vertex(4, 114);
+    vertex(71, 90);
+    vertex(107, 129);
+    vertex(91, 75);
+    vertex(154, 60);
+    vertex(90, 52);
+    vertex(79, -2);
+    vertex(64, 46);
+    endShape(CLOSE);
+    pop();
+  }
+}
+
 
 Boid.prototype.renderBird = function() {
   // Draw a triangle rotated in the direction of velocity

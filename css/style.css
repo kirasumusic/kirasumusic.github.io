@@ -177,12 +177,18 @@ a#homePageLogo, a#logo {
 #logo svg g, #homePageLogo svg g {
   transform: scale(.06);
 }
-#logo svg path, #homePageLogo svg path {
+#logo svg path {
   fill:#A9A9A9;
 }
+
 #logo svg:hover path, #homePageLogo svg:hover path {
   fill:white;
 }
+
+#homePageLogo svg path {
+fill:white;
+}
+
 
 nav {
   font-family: MoonLight;
@@ -257,6 +263,7 @@ nav {
   #homePageLogo svg g {
     /* CSS that should be displayed if width is equal to or less than 675px goes here */
     transform: scale(.03);
+    fill: white;
   }
 
   a#homePageLogo {

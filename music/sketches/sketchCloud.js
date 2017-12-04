@@ -38,9 +38,9 @@ function preload() {
     rainImgs[i] = loadImage("assets/rain" + i + ".png");
   }
 
-  for (var i = 0; i < 16; i++) {
-    orchidImgs[i] = loadImage("../assets/orchid/output-" + getNum(i*2+1) + ".jpg");
-  }
+  // for (var i = 0; i < 16; i++) {
+  //   orchidImgs[i] = loadImage("../assets/orchid/output-" + getNum(i*2+1) + ".jpg");
+  // }
 
   musicplayer = new MusicPlayer("Cycles", "cycles", "delta-waves", "song-for-m");
 }
@@ -63,17 +63,16 @@ function setup() {
 }
 
 function draw() {
-  //background(backgroundImg);
+  background(backgroundImg);
   //var title = "../assets/orchid/output-" + getNum(thunderNum) + ".jpg";
-  background(orchidImgs[orchidIndex]);
-  if (orchidIndex == 15) cloud.isRaining = false;
+  //background(orchidImgs[orchidIndex]);
+  //if (orchidIndex == 15) cloud.isRaining = false;
   checkThunder();
   if (!thunder) {
     fill(0);
     rect(0, 0, width, height);
   }
   cloud.render();
-  //image(orchid, 400, height-orchid.height);
 
   musicplayer.display();
 }

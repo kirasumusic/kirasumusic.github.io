@@ -47,7 +47,8 @@ function setup() {
 
 function draw() {
   background(backgroundImg);
-  stars.star();
+
+  stars.blackStar();
   var h = 10*sin(millis()/500)+10;
   var xp = width/2-island.width/2;
   image(island, xp, h);
