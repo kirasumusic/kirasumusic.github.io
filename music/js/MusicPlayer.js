@@ -115,8 +115,8 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     this.endX = this.playCountX + this.playCountW;
     this.w = this.endX - this.x;
 
-    arrowLeft.position(windowWidth*.05, this.y);
-    arrowRight.position(windowWidth*.95 - 25, this.y);
+    arrowLeft.position(50, this.y);
+    arrowRight.position(windowWidth-50 - 25, this.y);
   }
   this.initSmall = function() {
     this.isBig = false;
@@ -142,8 +142,8 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
 
     // arrowLeft.position((windowWidth - this.w)/2 + 10, this.y - 43);
     // arrowRight.position((windowWidth + this.w)/2 - 24 - 10, this.y - 43);
-    arrowLeft.position(windowWidth*.05, this.y - this.h/2 + 20);
-    arrowRight.position(windowWidth*.95 - 25, this.y - this.h/2 + 20);
+    arrowLeft.position(10, this.y - this.h/2 + 20);
+    arrowRight.position(windowWidth- 10 - 25, this.y - this.h/2 + 20);
   }
   this.display = function() {
     if (this.isBig) this.displayBig();
