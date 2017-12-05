@@ -166,6 +166,9 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
   }
 
   this.displayBig = function() {
+    stroke(255);
+    strokeWeight(1);
+    line(windowWidth*.05, this.y - 40, windowWidth*.95, this.y - 40);
     if (hasLoaded == false) {
       this.initBig();
       hasLoaded = true;
@@ -185,6 +188,7 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     this.displayEndCaps();
   }
   this.displaySmall = function() {
+    line(windowWidth*.05, this.y - 50, windowWidth*.95, this.y - 50);
     if (hasLoaded == false) {
       this.initSmall();
       hasLoaded = true;
