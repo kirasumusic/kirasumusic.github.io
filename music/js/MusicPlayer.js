@@ -146,6 +146,7 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     arrowRight.position(windowWidth- 10 - 25, this.y - this.h/2 + 20);
   }
   this.display = function() {
+    colorMode(RGB, 255);
     if (this.isBig) this.displayBig();
     else this.displaySmall();
   }
