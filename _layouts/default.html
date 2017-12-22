@@ -41,7 +41,14 @@
   <link rel="stylesheet" href="{{site.baseurl}}/css/style.css">
   <link rel="stylesheet" href="{{site.baseurl}}/css/full-width-pics.css" >
 
-  <!-- not sure why this isn't working  --> 
+  <!-- layout custom CSS  -->
+  {% if layout.custom_css %}
+    {% for stylesheet in layout.custom_css %}
+    <link rel="stylesheet" href="{{site.baseurl}}/css/{{ stylesheet }}.css" media="screen" type="text/css">
+    {% endfor %}
+  {% endif %}
+
+  <!-- page custom CSS  -->
   {% if page.custom_css %}
     {% for stylesheet in page.custom_css %}
     <link rel="stylesheet" href="{{site.baseurl}}/css/{{ stylesheet }}.css" media="screen" type="text/css">
@@ -87,6 +94,14 @@
 
   </main>
 
+  <!-- layout scripts -->
+  {% if layout.custom_js %}
+    {% for js_file in layout.custom_js %}
+    <script src='{{site.baseurl}}/js/{{ js_file }}.js' type="text/javascript"></script>
+    {% endfor %}
+  {% endif %}
+
+  <!-- page scripts -->
   {% if page.custom_js %}
     {% for js_file in page.custom_js %}
     <script src='{{site.baseurl}}/js/{{ js_file }}.js' type="text/javascript"></script>
