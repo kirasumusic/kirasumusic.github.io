@@ -167,8 +167,8 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
   }
 
   this.displayBig = function() {
-    colorMode(RGB, 255);
     stroke(255);
+    fill(255);
     strokeWeight(1);
     line(windowWidth*.05, this.y - 40, windowWidth*.95, this.y - 40);
     if (hasLoaded == false) {
@@ -190,6 +190,8 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     this.displayEndCaps();
   }
   this.displaySmall = function() {
+    fill(255);
+    stroke(255);
     line(windowWidth*.05, this.y - 50, windowWidth*.95, this.y - 50);
     if (hasLoaded == false) {
       this.initSmall();
