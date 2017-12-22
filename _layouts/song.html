@@ -2,17 +2,24 @@
 layout: default
 ---
 
-<!-- Custom CSS -->
-<link href="{{site.baseurl}}/css/sticky-footer-navbar.css" rel="stylesheet">
-<link href="{{site.baseurl}}/css/canvasfull.css" rel="stylesheet">
+<!-- Not sure why the custom_css isn't working... -->
+<link rel="stylesheet" href="{{site.baseurl}}/css/sticky_footer_navbar.css">
+<link rel="stylesheet" href="{{site.baseurl}}/css/starry_night.css">
+
+{{ content }}
 
 <footer class="footer">
   <div class="showOnLoad">
     <div id="songPlayerBox"></div>
   </div>
 </footer>
+
 <script src="{{site.baseurl}}/js/flock.js" type="text/javascript"></script>
 <script src="{{site.baseurl}}/js/MusicPlayer.js" type="text/javascript"></script>
 <script src="{{site.baseurl}}/js/doneLoading.js" type="text/javascript"></script>
 
-{{ content }}
+{% if page.sketch %}
+  {% for js_file in page.sketch %}
+  <script src='{{site.baseurl}}/js/{{ js_file }}.js' type="text/javascript"></script>
+  {% endfor %}
+{% endif %}
