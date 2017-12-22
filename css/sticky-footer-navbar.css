@@ -1,0 +1,116 @@
+/* http://getbootstrap.com/docs/3.3/examples/sticky-footer-navbar/sticky-footer-navbar.css*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 85px;
+  height: 100%;
+}
+
+
+.footer {
+  /*position: absolute;
+  bottom: 0;
+  width: 100%;*/
+  /* Set the fixed height of the footer here
+  height: 150px;*/
+  /*padding:10px;
+  width:100%;*/
+  width:100%;
+}
+
+.footer .container-fluid {
+  /*padding-top: 10px;
+  padding-right: 35px;
+  padding-left: 35px;*/
+
+}
+
+hr.songLine {
+  position: absolute;
+  bottom: 90px;
+  border-top: 1px solid white;
+  width:90%;
+  margin-left: 5%;
+}
+
+.nowPlayingBox {
+  line-height:150%;
+}
+.nowPlayingText {
+  font-size: 1.5vw;
+}
+
+#songPlayerBox {
+  width: 100%;
+}
+
+.songNowPlaying {
+  position: absolute;
+  bottom: 60px;
+  left: 10%;
+  font-size: 18px;
+  letter-spacing: 5px;
+  text-align: center;
+  width: auto;
+}
+
+.songTitle {
+  position: absolute;
+  bottom: 20px;
+  left: 10%;
+  font-size: 30px;
+  letter-spacing: 5px;
+  text-align: center;
+  width: auto;
+}
+
+@media (max-width: 1200px) {
+  .songNowPlaying {
+    display: none;
+  }
+  .songTitle {
+    position: absolute;
+    bottom: 70px;
+    width: 100%;
+    letter-spacing: 5px;
+    font-size: 13px;
+    left: auto;
+    text-align: center;
+  }
+}
+
+.audioBtn img {
+  width:50px;
+  height:50px;
+}
+
+.musicplayer {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+}
+
+.musicplayer:hover {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+}
+
+.musicplayer:active {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+}
+
+.arrow {
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 30px;
+}

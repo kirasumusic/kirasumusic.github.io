@@ -1,0 +1,6 @@
+# find . -size +1G | sed 's|^\./||g' | cat >> .gitignore
+
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
