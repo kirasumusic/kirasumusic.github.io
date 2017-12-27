@@ -52,7 +52,7 @@ hr.songLine {
 
 .songNowPlaying {
   position: absolute;
-  bottom: 60px;
+  bottom: 70px;
   left: 10%;
   font-size: 18px;
   letter-spacing: 5px;
@@ -62,7 +62,7 @@ hr.songLine {
 
 .songTitle {
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   left: 10%;
   font-size: 30px;
   letter-spacing: 5px;

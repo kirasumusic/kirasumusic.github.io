@@ -121,9 +121,18 @@ function mouseClicked() {
   }
 }
 
+function mousePressed() {
+  musicplayer.mouseClick();
+}
+
+function mouseReleased() {
+  musicplayer.mouseRelease();
+}
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  stars.resize();
+  //stars.resize();
+  musicplayer.update(50, height - 100);
 }
 
 function keyPressed() {

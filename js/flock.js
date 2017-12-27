@@ -1,3 +1,6 @@
+// daniel shiffman gets credit here
+// https://processing.org/examples/flocking.html
+
 var mode = {flying: 0, home: 1, mouse:2, landed:3};
 
 function Flock() {

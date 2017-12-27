@@ -110,6 +110,9 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     var wEverythingButPlayBar = 416;
     this.playBarW = wmus - wEverythingButPlayBar;
 
+    this.playCountPadding = 10;
+    this.playCountW = 130;
+
     this.playCountX = this.playBarX + this.playBarW + this.playCountPadding;
 
     this.endX = this.playCountX + this.playCountW;
@@ -356,8 +359,8 @@ function mutePressed() {
   if (isMuted) {
     isMuted = false;
     sound.setVolume(lastVol);
+    buttonMute.addClass("glyphicon-volume-up");
     buttonMute.removeClass("glyphicon-volume-off");
-    buttonMute.removeClass("glyphicon-volume-up");
   }
   else {
     isMuted = true;

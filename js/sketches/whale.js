@@ -181,6 +181,13 @@ function Star(pic) {
   }
 }
 
+function mousePressed() {
+  musicplayer.mouseClick();
+}
+
+function mouseReleased() {
+  musicplayer.mouseRelease();
+}
 
 function settingSun() {
   for (var i = 0; i < width/2; i++) {
@@ -275,6 +282,7 @@ function windowResized() {
   for(var i = 0; i < 10; i++) {
     bubbles[i].update();
   }
+  musicplayer.update(50, height - 100);
 }
 
 

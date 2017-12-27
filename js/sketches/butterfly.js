@@ -226,6 +226,7 @@ function mouseReleased() {
   for (var i = 0; i < butterflyParts.right.length; i++) {
     butterflyParts.right[i].reset();
   }
+  musicplayer.mouseRelease();
 }
 
 function checkComplete() {
@@ -245,6 +246,7 @@ function mousePressed() {
   for (var i = 0; i < butterflyParts.right.length; i++) {
     butterflyParts.right[i].checkSelected();
   }
+  musicplayer.mouseClick();
 }
 
 // window.onload = function() {
@@ -268,6 +270,7 @@ function mousePressed() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   stars.resize();
+  musicplayer.update(50, height - 100);
 }
 
 function keyPressed() {

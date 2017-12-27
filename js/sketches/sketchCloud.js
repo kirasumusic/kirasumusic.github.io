@@ -94,16 +94,14 @@ function mouseReleased() {
   musicplayer.mouseRelease();
 }
 
-function mouseDragged() {
 
-}
 
 function windowResized() {
   var dx = (width - windowWidth)/2;
   var dy = (height - windowHeight)/2;
   //stars.resize();
   resizeCanvas(windowWidth, windowHeight);
-
+  musicplayer.update(50, height - 100);
 }
 
 function Cloud(x, y) {

@@ -334,13 +334,13 @@ function Box(x, y, w, sym) {
     this.isFull = false;
     this.isMatch = false;
   }
-
 }
 
 function mousePressed() {
   for (var i = 0; i < stars.length; i++) {
     stars[i].checkSelected();
   }
+  musicplayer.mouseClick();
 }
 
 function mouseReleased() {
@@ -369,6 +369,7 @@ function mouseReleased() {
   for (var i = 0; i < stars.length; i++) {
     stars[i].reset();
   }
+  musicplayer.mouseRelease();
 }
 
 function checkForMatches() {
@@ -389,4 +390,14 @@ function keyPressed() {
   else if (keyCode == RIGHT_ARROW) {
     window.location.href='song-for-m.html';
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  for (var i = 0; i < 4; i++) {
+    var rs = items[0].height*itemsScale[0];
+    boxes[i].x = windowWidth/2+rs*(-1.5+i);
+  }
+  //stars.resize();
+  musicplayer.update(50, height - 100);
 }
