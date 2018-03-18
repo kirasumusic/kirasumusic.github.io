@@ -14,7 +14,7 @@ var musicplayer;
 
 function preload() {
   backgroundImg = loadImage("assets/delta/background.jpg");
-  if (windowWidth < 700) bScale = map(windowWidth, 345, 1500, 345/700*.5, .5);
+  if (windowWidth < 700) bScale = map(windowWidth, 345, 1500, 345/700*.4, .4);
   else bScale = map(windowWidth, 345, 1500, 345/1500*.5, .5);
   butterflyParts.body[0] = new ButterflyPart(loadImage("assets/delta/butterfly_body.png"), -150, -450, false);
   butterflyParts.left[0] = new ButterflyPart(loadImage("assets/delta/bottomLeft.png"), -420, -30, true);

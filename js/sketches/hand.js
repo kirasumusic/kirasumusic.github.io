@@ -22,6 +22,7 @@ var allMatched = false;
 var lastTouched = "top";
 var musicplayer;
 
+var starScale = 1;
 
 function preload() {
   for (var i = 0; i < 5; i++ ) {
@@ -42,10 +43,15 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  var numStars = 50;
+  if (width < 700) {
+    starScale = map(width, 0, 700, 0, 1);
+    numStars = 20;
+  }
   imageMode(CENTER);
   rectMode(CENTER);
 
-  for (var i = 0; i < 50; i++ ) {
+  for (var i = 0; i < numStars; i++ ) {
     stars[i] = new Star(i%6);
   }
 
@@ -215,6 +221,10 @@ function Star(pic) {
   this.show = true;
   this.dragStart = {x: 0, y: 0};
   this.boxNum = -1;
+  this.speed = 2.0;
+  if (width < 700) {
+    this.speed = .5;
+  }
   //this.pic = floor(random(6));
   if (floor(random(2)) == 0) {
     this.x = random(width/2-150);
@@ -236,7 +246,7 @@ function Star(pic) {
       fill(255, 70);
       ellipse(this.x, this.y, w*sin(millis()/100)*.5);
     }
-    image(starImgs[this.pic], this.x, this.y);
+    image(starImgs[this.pic], this.x, this.y, starImgs[this.pic].width*starScale, starImgs[this.pic].height*starScale);
   }
   this.mouseOver = function() {
     var w = starImgs[this.pic].width;
@@ -260,8 +270,8 @@ function Star(pic) {
       this.y = mouseY-this.dragStart.y;
     }
     else if (!this.hasSnapped){
-      this.x += 2.0*sin(this.angle);
-      this.y += 2.0*cos(this.angle);
+      this.x += this.speed*sin(this.angle);
+      this.y += this.speed*cos(this.angle);
       if (this.x > width) this.x = 0;
       else if (this.x < 0) this.x = width;
       if (this.y > height) this.y = 0;

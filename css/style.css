@@ -37,6 +37,12 @@ h1 {
   font-size: 30px;
 }
 
+h2 {
+  font-family: MoonLight;
+  letter-spacing: 12px;
+  font-size: 22px;
+}
+
 p {
   font-family: MoonLight;
   font-size: 13px;
@@ -96,7 +102,7 @@ canvas {
 }
 .navbar-collapse.collapse {
   display: none!important;
-  width: 250px;
+  width: 285px;
   float: right;
 }
 
@@ -298,4 +304,20 @@ nav {
 
 .showOnLoad {
   visibility: hidden;
+}
+
+/* https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php */
+.experienceVid {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+
+.experienceVid iframe {
+  position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }

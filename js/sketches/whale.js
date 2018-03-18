@@ -34,12 +34,15 @@ function setup() {
   origW = whale.width*.6;
 
   waterWidth = width+40
-  if (width < 768) {
-    whaleFactor = width/1500;
-    waterWidth = 768;
-  }
-  whale.resize(whale.width*whaleFactor, whale.height*whaleFactor);
 
+  if (width < 768) {
+    whaleFactor = width/1800;
+    waterWidth = 768;
+    var newW = width*.8;
+    var newH = whale.height * newW/whale.width;
+  }
+  //whale.resize(whale.width*whaleFactor, whale.height*whaleFactor);
+  whale.resize(newW, newH);
 
   for(var i = 0; i < 10; i++) {
     bubbles[i] = new Bubble();
