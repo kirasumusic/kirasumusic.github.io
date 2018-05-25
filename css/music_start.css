@@ -1,0 +1,29 @@
+#startPlaying {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+  background-color: black;
+  z-index: 800;
+}
+
+.startPlayButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+
+
+  background-color: Transparent;
+  border: none;
+  z-index: 1100;
+  color: white;
+  font-size: 50px;
+}
+
+#songPlayerBox {
+  z-index: 100;
+}

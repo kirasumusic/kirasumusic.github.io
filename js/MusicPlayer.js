@@ -2,8 +2,26 @@
 var isPlayingSong = false;
 var isMuted = false;
 var lastVol = 1;
-var buttonPlay, buttonMute, sound, arrowLeft, arrowRight, nextS, previousS, songTitleDiv, songPlayingDiv;
+var buttonPlay, buttonMute, sound, arrowLeft, arrowRight, nextS, previousS, songTitleDiv, songPlayingDiv, songPlayingStart;
 var hasLoaded = false;
+
+var isHidden = false;
+
+var released = true;
+var lastCalled = 0;
+var hasBegun = false;
+
+function startMusic() {
+  var s = select('#startPlaying');
+  s.style('visibility: hidden;');
+  // var playerShow = select(".showOnPlay");
+  // playerShow.style('visibility: visible;')
+  isHidden = false;
+
+  hasBegun = true;
+
+  playSound2();
+}
 
 function MusicPlayer(songTitle, songFile, ps, ns) {
   this.x = -1000;
@@ -40,7 +58,7 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
   buttonPlay.parent("#songPlayerBox");
   buttonPlay.id("playButton");
   buttonPlay.class("glyphicon glyphicon-play musicplayer");
-  buttonPlay.mousePressed(playPressed);
+  buttonPlay.touchEnded(playPressed);
 
   this.playCountPadding = 10;
   this.playCountW = 130;
@@ -99,9 +117,9 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     this.muteButtonW = this.muteButtonPadding * 2 + 36;
     buttonMute.position(this.muteButtonX, this.y+10);
 
-    this.volX = this.muteButtonX + this.muteButtonPadding*2 + 10;
+    this.volX = this.muteButtonX + this.muteButtonPadding*2;
 
-    this.playButtonX = this.volX + this.volW;
+    this.playButtonX = this.volX + this.volW - 15;
     buttonPlay.position(this.playButtonX+this.playButtonPadding, this.y+10);
 
     this.playBarX = this.playButtonX + this.playButtonW;
@@ -113,13 +131,17 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     this.playCountPadding = 10;
     this.playCountW = 130;
 
-    this.playCountX = this.playBarX + this.playBarW + this.playCountPadding;
+    this.playCountX = this.playBarX + this.playBarW + this.playCountPadding + 15;
 
     this.endX = this.playCountX + this.playCountW;
     this.w = this.endX - this.x;
 
     arrowLeft.position(50, this.y);
     arrowRight.position(windowWidth-50 - 25, this.y);
+
+    // var startPlay = select(".startPlayButton");
+    // textSize(30);
+    // startPlay.position(songTitleDiv.position().x + textWidth(this.songTitle)*1.8, songTitleDiv.position().y);
   }
   this.initSmall = function() {
     this.isBig = false;
@@ -149,9 +171,12 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     arrowRight.position(windowWidth- 10 - 25, this.y - this.h/2 + 20);
   }
   this.display = function() {
-    colorMode(RGB, 255);
-    if (this.isBig) this.displayBig();
-    else this.displaySmall();
+    if (!isHidden) {
+      colorMode(RGB, 255);
+      if (this.isBig) this.displayBig();
+      else this.displaySmall();
+    }
+
   }
   this.displayTitle = function() {
     textFont(this.myFont);
@@ -179,7 +204,7 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
       hasLoaded = true;
       buttonMute.class("glyphicon glyphicon-volume-up musicplayer");
       buttonPlay.class("glyphicon glyphicon-play musicplayer");
-      if (!sound.isPlaying()) sound.play();
+      // if (!sound.isPlaying()) sound.play();
       sound.setVolume(lastVol);
     }
     stroke(255);
@@ -199,7 +224,7 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     if (hasLoaded == false) {
       this.initSmall();
       hasLoaded = true;
-      if (!sound.isPlaying()) sound.play();
+      // if (!sound.isPlaying()) sound.play();
       sound.setVolume(lastVol);
     }
     stroke(255);
@@ -370,16 +395,34 @@ function mutePressed() {
   }
 }
 
-function playPressed() {
-  if (sound.isPlaying()) {
+function playSound2() {
+  if (!sound.isPlaying()) {
     buttonPlay.removeClass("glyphicon-play");
     buttonPlay.addClass("glyphicon-pause");
-    sound.pause();
+    sound.play();
   }
-  else {
+}
+
+function pauseSound2() {
+  if (sound.isPlaying()) {
     buttonPlay.removeClass("glyphicon-pause");
     buttonPlay.addClass("glyphicon-play");
-    sound.play();
+    sound.pause();
+  }
+}
+
+function playPressed() {
+  if (hasBegun) {
+    // hack for mobile because of https://github.com/processing/p5.js/issues/1815
+    if(millis() - lastCalled > 500){
+      if (sound.isPlaying()) {
+        pauseSound2();
+      }
+      else {
+        playSound2();
+      }
+  		lastCalled = millis();
+  	}
   }
 }
 

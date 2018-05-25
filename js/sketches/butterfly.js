@@ -278,6 +278,6 @@ function keyPressed() {
     window.location.href='kirasu.html';
   }
   else if (keyCode == RIGHT_ARROW) {
-    window.location.href='delta-waves.html';
+    window.location.href='cycles.html';
   }
 }

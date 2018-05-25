@@ -2,16 +2,22 @@
 layout: default
 custom_css:
 - sticky_footer_navbar
+- music_start
 custom_js:
 - flock
 - MusicPlayer
 - doneLoading
 ---
 
-{{ content }}
 
-<footer class="footer">
-  <div class="showOnLoad">
-    <div id="songPlayerBox"></div>
+{{ content }}
+<div class="showOnLoad">
+  <div id="startPlaying">
+    <button type="button" class="btn startPlayButton glyphicon glyphicon-play" onclick="startMusic()">
   </div>
-</footer>
+
+  <footer class="footer showOnPlay">
+    <div id="songPlayerBox"></div>
+
+  </footer>
+</div>
