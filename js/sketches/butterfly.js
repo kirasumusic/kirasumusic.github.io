@@ -11,23 +11,23 @@ var ellipseS = 0;
 var pulsing = false;
 var windowLoaded = false;
 var musicplayer;
+var num = 0;
+var randomizing = true;
 
 function preload() {
   backgroundImg = loadImage("assets/delta/background.jpg");
   if (windowWidth < 700) bScale = map(windowWidth, 345, 1500, 345/700*.4, .4);
   else bScale = map(windowWidth, 345, 1500, 345/1500*.5, .5);
-  butterflyParts.body[0] = new ButterflyPart(loadImage("assets/delta/butterfly_body.png"), -150, -450, false);
-  butterflyParts.left[0] = new ButterflyPart(loadImage("assets/delta/bottomLeft.png"), -420, -30, true);
-  butterflyParts.left[1] = new ButterflyPart(loadImage("assets/delta/topLeft.png"), -730, -180*3, true);
-  butterflyParts.left[2] = new ButterflyPart(loadImage("assets/delta/topLeft_0.png"),-700, -550, true);
-  //butterflyParts.left[3] = new ButterflyPart(loadImage("assets/delta/middleLeft.png"), -190*bScale*2, 100*bScale*2, true);
+  butterflyParts.body[0] = new ButterflyPart("body", loadImage("assets/delta/butterfly_body.png"), -150, -450, false);
+  butterflyParts.left[0] = new ButterflyPart("bottomleft", loadImage("assets/delta/bottomLeft.png"), -420, -30, true);
+  butterflyParts.left[1] = new ButterflyPart("topleft", loadImage("assets/delta/topLeft.png"), -730, -180*3, true);
+  butterflyParts.left[2] = new ButterflyPart("topleft0", loadImage("assets/delta/topLeft_0.png"),-700, -550, true);
 
-  butterflyParts.right[0] = new ButterflyPart(loadImage("assets/delta/bottomRight.png"), 10, -20, true);
-  butterflyParts.right[1] = new ButterflyPart(loadImage("assets/delta/bottomRight_0.png"), 250, 200, true);
-  butterflyParts.right[2] = new ButterflyPart(loadImage("assets/delta/topRight.png"), 10, -175*3, true);
-  butterflyParts.right[3] = new ButterflyPart(loadImage("assets/delta/topRight_0.png"), 300, -650, true);
-  butterflyParts.right[4] = new ButterflyPart(loadImage("assets/delta/topRight_1.png"), 450, -580, true);
-  //butterflyParts.right[5] = new ButterflyPart(loadImage("assets/delta/middleRight.png"), windowWidth/2+280, windowHeight/2, true);
+  butterflyParts.right[0] = new ButterflyPart("bottomright", loadImage("assets/delta/bottomRight.png"), 10, -20, true);
+  butterflyParts.right[1] = new ButterflyPart("bottomright0", loadImage("assets/delta/bottomRight_0.png"), 250, 200, true);
+  butterflyParts.right[2] = new ButterflyPart("topright", loadImage("assets/delta/topRight.png"), 10, -175*3, true);
+  butterflyParts.right[3] = new ButterflyPart("topright0", loadImage("assets/delta/topRight_0.png"), 300, -650, true);
+  butterflyParts.right[4] = new ButterflyPart("topright1", loadImage("assets/delta/topRight_1.png"), 450, -580, true);
 
   musicplayer = new MusicPlayer("Rite of Spring", "riteOfSpring", "kirasu", "cycles");
 }
@@ -73,28 +73,23 @@ function draw() {
     butterflyParts.left[i].display();
     butterflyParts.left[i].mouseOver();
     butterflyParts.left[i].move();
-    //butterflyParts.left[i].update(moveStep);
   }
 
   for (var i = 0; i < butterflyParts.right.length; i++) {
     butterflyParts.right[i].display();
     butterflyParts.right[i].mouseOver();
     butterflyParts.right[i].move();
-    //butterflyParts.right[i].update(moveStep);
   }
   butterflyParts.body[0].display();
-  // body
-  // //imageMode(CENTER);
-  // butterflyParts.body[0].display();
-  //butterflyParts.body[0].move();
-  //image(butterflyParts.body[0].img, butterflyParts.body[0].x, butterflyParts.body[0].y, butterflyParts.body[0].img.width*bScale, butterflyParts.body[0].img.height*bScale);
 
     musicplayer.display();
 }
 
 
 
-function ButterflyPart(img, x, y, dir) {
+function ButterflyPart(n, img, x, y, dir) {
+  this.id = num++;
+  this.name = n;
   this.img = img;
   this.finalX = windowWidth/2 + x*bScale;
   this.finalY = windowHeight/2 + y*bScale;
@@ -139,6 +134,7 @@ function ButterflyPart(img, x, y, dir) {
       }
       else if (sound.currentTime() > endT) {
         this.show = true;
+        randomizing = false;
       }
 
       if (this.show) image(this.img, this.x, this.y);
@@ -155,11 +151,6 @@ function ButterflyPart(img, x, y, dir) {
         fill(255, 30);
         ellipse(this.x + this.img.width/2, this.y+ this.img.height/2, this.img.width*.25);
 
-        // fill(0, 255, 255);
-        // ellipse(this.x, this.y, 30);
-        //
-        // fill(50, 255, 255);
-        // ellipse(this.finalX, this.finalY, 30);
         return true;
       };
       return false;
@@ -192,7 +183,7 @@ function ButterflyPart(img, x, y, dir) {
       if (d < 150) {
         this.x = this.finalX;
         this.y = this.finalY;
-        this.hasSnapped = true;
+        if (!randomizing) this.hasSnapped = true;
         if (checkComplete()) pulsing = true;
       }
     }
@@ -278,6 +269,6 @@ function keyPressed() {
     window.location.href='kirasu.html';
   }
   else if (keyCode == RIGHT_ARROW) {
-    window.location.href='cycles.html';
+    window.location.href='delta-waves.html';
   }
 }

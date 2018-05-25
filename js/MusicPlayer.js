@@ -15,7 +15,7 @@ function startMusic() {
   var s = select('#startPlaying');
   s.style('visibility: hidden;');
   // var playerShow = select(".showOnPlay");
-  // playerShow.style('visibility: visible;')
+  // playerShow.style('visibility: hidden;')
   isHidden = false;
 
   hasBegun = true;
@@ -165,8 +165,6 @@ function MusicPlayer(songTitle, songFile, ps, ns) {
     this.endX = this.playCountX + this.playCountW;
     this.w = this.endX - this.x;
 
-    // arrowLeft.position((windowWidth - this.w)/2 + 10, this.y - 43);
-    // arrowRight.position((windowWidth + this.w)/2 - 24 - 10, this.y - 43);
     arrowLeft.position(10, this.y - this.h/2 + 20);
     arrowRight.position(windowWidth- 10 - 25, this.y - this.h/2 + 20);
   }

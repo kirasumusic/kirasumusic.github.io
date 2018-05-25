@@ -46,8 +46,9 @@ function preload() {
 }
 
 function setup() {
-  if (windowWidth < 1200 && windowWidth > 768) createCanvas(1200, windowHeight);
-  else createCanvas(windowWidth, windowHeight);
+  // if (windowWidth < 1200 && windowWidth > 768) createCanvas(1200, windowHeight);
+  // else createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
   ellipseMode(CENTER);
   colorMode(HSB, width);
 
